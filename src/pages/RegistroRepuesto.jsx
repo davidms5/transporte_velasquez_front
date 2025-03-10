@@ -1,15 +1,17 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./RegistroRepuesto.css"; // Importamos el CSS
+import { useState } from "react";
 
 function RegistroRepuesto() {
   const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
-    cantidad: "",
-    nombre: "",
     id: "",
-    factura: "",
+    codigoFactura: "", // Ahora es editable
+    nombre: "",
+    cantidad: "",
+    descripcion: "",
   });
-  const [mensaje, setMensaje] = useState(""); // Estado para el mensaje
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,37 +19,36 @@ function RegistroRepuesto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos registrados:", formData);
-    setMensaje("¡Se ha registrado correctamente!"); // Muestra el mensaje
-    setTimeout(() => {
-      setMensaje(""); // Oculta el mensaje después de 3 segundos
-      navigate("/repuestos"); // Regresa automáticamente después del mensaje
-    }, 3000);
+    
+    console.log("Nuevo Repuesto Registrado:", formData);
+    
+    navigate("/existencia-repuestos");
   };
 
   return (
-    <div className="form-container">
+    <div className="registro-repuesto-page">
       <h2 className="title">Registro de Repuesto</h2>
-      
-      {mensaje && <p className="success-message">{mensaje}</p>} {/* Mensaje de éxito */}
+      <p>Ingresa los datos del nuevo repuesto.</p>
 
-      <form onSubmit={handleSubmit}>
-        <label>Cantidad:</label>
-        <input type="number" name="cantidad" value={formData.cantidad} onChange={handleChange} required />
+      <form className="registro-form" onSubmit={handleSubmit}>
+        <input type="number" name="id" placeholder="ID del Repuesto" required value={formData.id} onChange={handleChange} />
 
-        <label>Nombre del Repuesto:</label>
-        <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
+        <input type="text" name="codigoFactura" placeholder="Código de Factura" required value={formData.codigoFactura} onChange={handleChange} />
 
-        <label>ID del Repuesto:</label>
-        <input type="text" name="id" value={formData.id} onChange={handleChange} required />
+        <input type="text" name="nombre" placeholder="Nombre del repuesto" required value={formData.nombre} onChange={handleChange} />
 
-        <label>N° de Factura:</label>
-        <input type="text" name="factura" value={formData.factura} onChange={handleChange} required />
+        <input type="number" name="cantidad" placeholder="Cantidad" required value={formData.cantidad} onChange={handleChange} />
 
-        <button type="submit" className="submit-button">Registrar</button>
+        <textarea name="descripcion" placeholder="Descripción del repuesto" required value={formData.descripcion} onChange={handleChange}></textarea>
+
+        <button type="submit" className="registro-button">
+          Registrar Repuesto
+        </button>
       </form>
 
-      <button className="back-button" onClick={() => navigate("/repuestos")}>Regresar</button>
+      <button className="back-button" onClick={() => navigate("/repuestos")}>
+        Regresar
+      </button>
     </div>
   );
 }

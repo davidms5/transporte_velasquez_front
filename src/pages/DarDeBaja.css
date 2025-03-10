@@ -1,0 +1,35 @@
+.dar-de-baja-page {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #1E3A5F, #A8B5C3);
+    color: white;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: #FFD700;
+  }
+  
+  .repuestos-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .repuestos-list li {
+    margin: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .submit-button {
+    background-color: #FF4500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .submit-button:hover {
+    background-color: #E63E00;
+  }
+  

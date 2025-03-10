@@ -1,0 +1,81 @@
+/* Hace que la página ocupe toda la pantalla */
+.registro-repuesto-page {
+    width: 100vw;
+    height: 100vh; /* 100% del alto de la pantalla */
+    background: linear-gradient(to right, #1B3C59, #4A6472); /* Azul oscuro → Gris azulado */
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Título del módulo */
+  .title {
+    font-size: 2.5rem;
+    color: #FFD700; /* Dorado */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+  }
+  
+  /* Descripción */
+  .registro-repuesto-page p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #E0E0E0; /* Blanco grisáceo */
+  }
+  
+  /* Contenedor del formulario */
+  .registro-form {
+    background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Estilos de los inputs */
+  .registro-form input,
+  .registro-form textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+  }
+  
+  /* Botón de registrar */
+  .registro-button {
+    background-color: #1E90FF; /* Azul brillante */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+  }
+  
+  .registro-button:hover {
+    background-color: #0073E6;
+    transform: scale(1.05); /* Efecto de agrandado */
+  }
+  
+  /* Botón de regresar con color diferente */
+  .back-button {
+    background-color: #FF4500; /* Rojo/Naranja */
+  }
+  
+  .back-button:hover {
+    background-color: #E63E00;
+  }
+  

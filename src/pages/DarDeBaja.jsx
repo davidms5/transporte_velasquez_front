@@ -1,52 +1,68 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./DarDeBaja.css"; // Importamos el CSS
 
 function DarDeBaja() {
   const navigate = useNavigate();
 
-  // Lista de repuestos (Ejemplo)
-  const repuestos = [
-    { id: 1, nombre: "Filtro de aceite" },
-    { id: 2, nombre: "Batería" },
-    { id: 3, nombre: "Pastillas de freno" },
-    { id: 4, nombre: "Alternador" },
-  ];
+  // Estado inicial de los repuestos con cantidad
+  const [repuestos, setRepuestos] = useState([
+    { id: 1, nombre: "Filtro de aceite", cantidad: 10 },
+    { id: 2, nombre: "Batería", cantidad: 5 },
+    { id: 3, nombre: "Pastillas de freno", cantidad: 8 },
+    { id: 4, nombre: "Alternador", cantidad: 3 },
+  ]);
 
-  // Estado para almacenar los repuestos seleccionados
-  const [seleccionados, setSeleccionados] = useState([]);
+  // Estado para almacenar las cantidades a dar de baja
+  const [bajas, setBajas] = useState({});
 
-  // Manejar la selección de repuestos
-  const handleSelect = (id) => {
-    setSeleccionados((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
+  // Manejar cambios en la cantidad a dar de baja
+  const handleCantidadChange = (id, cantidad) => {
+    setBajas((prev) => ({
+      ...prev,
+      [id]: Math.min(Math.max(0, cantidad), repuestos.find((r) => r.id === id).cantidad), // Limita el valor
+    }));
   };
 
-  // Manejar la eliminación de repuestos
+  // Confirmar la baja de los repuestos seleccionados
   const handleSubmit = () => {
-    alert(`Se han dado de baja los siguientes repuestos: ${seleccionados.map((id) => repuestos.find((r) => r.id === id).nombre).join(", ")}`);
-    setSeleccionados([]); // Limpiar selección después de dar de baja
+    const repuestosActualizados = repuestos.map((repuesto) => {
+      if (bajas[repuesto.id]) {
+        return { ...repuesto, cantidad: repuesto.cantidad - bajas[repuesto.id] };
+      }
+      return repuesto;
+    });
+
+    alert(`Se han dado de baja:\n${Object.entries(bajas)
+      .map(([id, cantidad]) => `${cantidad} de ${repuestos.find((r) => r.id == id).nombre}`)
+      .join("\n")}`);
+
+    // Filtrar los repuestos que todavía tienen existencias
+    setRepuestos(repuestosActualizados.filter((r) => r.cantidad > 0));
+    setBajas({});
   };
 
   return (
-    <div className="form-container">
+    <div className="dar-de-baja-page">
       <h2 className="title">Dar de Baja Repuestos</h2>
-      <p>Seleccione los repuestos que desea dar de baja:</p>
+      <p>Seleccione los repuestos y la cantidad que desea dar de baja:</p>
 
-      <ul>
+      <ul className="repuestos-list">
         {repuestos.map((repuesto) => (
-          <li key={repuesto.id}>
+          <li key={repuesto.id} className="repuesto-item">
+            <span>{repuesto.nombre} (Disponible: {repuesto.cantidad})</span>
             <input
-              type="checkbox"
-              checked={seleccionados.includes(repuesto.id)}
-              onChange={() => handleSelect(repuesto.id)}
+              type="number"
+              min="0"
+              max={repuesto.cantidad}
+              value={bajas[repuesto.id] || ""}
+              onChange={(e) => handleCantidadChange(repuesto.id, parseInt(e.target.value) || 0)}
             />
-            {repuesto.nombre}
           </li>
         ))}
       </ul>
 
-      <button className="submit-button" onClick={handleSubmit} disabled={seleccionados.length === 0}>
+      <button className="submit-button" onClick={handleSubmit} disabled={Object.values(bajas).every((val) => !val)}>
         Confirmar Baja
       </button>
 

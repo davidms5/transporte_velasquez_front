@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import "./Reportes.css"; // Importamos el CSS
 
 function Reportes() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="reportes-page">
       <h2 className="title">Reportes de Entrada y Salida</h2>
       <p>Aquí puedes ver los reportes de entradas y salidas de repuestos.</p>
 
@@ -14,7 +15,9 @@ function Reportes() {
       </button>
 
       {/* Botón para regresar al Módulo de Repuestos */}
-      <button className="back-button" onClick={() => navigate("/repuestos")}>Regresar</button>
+      <button className="back-button" onClick={() => navigate("/repuestos")}>
+        Regresar
+      </button>
     </div>
   );
 }

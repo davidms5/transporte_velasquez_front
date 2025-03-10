@@ -12,7 +12,9 @@ import RegistroRuta from "./pages/RegistroRuta";
 import AgregarRuta from "./pages/AgregarRuta";
 import AsignacionRutas from "./pages/AsignacionRutas";
 import Horario from "./pages/Horario";
-import HistorialRutas from "./pages/HistorialRutas"; // ⚠️ Nueva importación
+import HistorialRutas from "./pages/HistorialRutas";
+import ExistenciaRepuestos from "./pages/ExistenciaRepuestos";
+import Facturacion from "./pages/Facturacion"; // ⚠️ Nueva importación
 
 function App() {
   return (
@@ -32,7 +34,9 @@ function App() {
           <Route path="/agregar-ruta" element={<AgregarRuta />} />
           <Route path="/asignacion-rutas" element={<AsignacionRutas />} />
           <Route path="/horario" element={<Horario />} />
-          <Route path="/historial-rutas" element={<HistorialRutas />} /> {/* ⚠️ Nueva Ruta */}
+          <Route path="/historial-rutas" element={<HistorialRutas />} />
+          <Route path="/existencia-repuestos" element={<ExistenciaRepuestos />} />
+          <Route path="/facturacion" element={<Facturacion />} /> {/* ⚠️ Nueva Ruta */}
         </Routes>
       </div>
     </Router>

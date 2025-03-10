@@ -1,0 +1,47 @@
+/* Hace que la página ocupe toda la pantalla */
+.inicio-page {
+    width: 100vw;
+    height: 100vh; /* 100% del alto de la pantalla */
+    background: linear-gradient(to right, #2C3E50, #BDC3C7); /* Azul oscuro → Gris */
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Título de la página */
+  .title {
+    font-size: 2.5rem;
+    color: #FFD700; /* Dorado */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+  }
+  
+  /* Descripción */
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para los botones */
+  .module-button {
+    background-color: #1E90FF; /* Azul brillante */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+  }
+  
+  .module-button:hover {
+    background-color: #0073E6;
+    transform: scale(1.05); /* Efecto de agrandado */
+  }
+  

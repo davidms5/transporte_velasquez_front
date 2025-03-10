@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import "./Inicio.css"; // Importamos el CSS
 
 function Inicio() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="inicio-page">
       <h2 className="title">Bienvenido a la Página de Inicio</h2>
-      <p>¡Selecciona un módulo para continuar!</p>
+      <p className="description">¡Selecciona un módulo para continuar!</p>
 
       {/* Botón para ir al módulo de Repuestos */}
       <button className="module-button" onClick={() => navigate("/repuestos")}>
