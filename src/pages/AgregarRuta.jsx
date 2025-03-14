@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./AgregarRuta.css"; // Importamos los estilos CSS
 
 function AgregarRuta() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function AgregarRuta() {
     salida: "",
     llegada: "",
     numeroRuta: "",
-    precio: "", // Nuevo campo Precio
+    precio: "",
   });
 
   // Manejar cambios en los inputs
@@ -20,6 +21,7 @@ function AgregarRuta() {
   // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+
     alert(`Ruta Agregada: 
     Salida: ${rutaData.salida}, 
     Llegada: ${rutaData.llegada}, 
@@ -36,29 +38,57 @@ function AgregarRuta() {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="title">Agregar Nueva Ruta</h2>
-      <p>Complete los campos para agregar una nueva ruta.</p>
+    <div className="ruta-container">
+      <div className="ruta-form-box">
+        <h2 className="ruta-title">Agregar Nueva Ruta</h2>
+        <p className="ruta-description">Complete los campos para agregar una nueva ruta.</p>
 
-      {/* Formulario de Agregar Ruta */}
-      <form onSubmit={handleSubmit}>
-        <label>Ruta de Salida:</label>
-        <input type="text" name="salida" value={rutaData.salida} onChange={handleChange} required />
+        {/* Formulario */}
+        <form onSubmit={handleSubmit}>
+          <label>Ruta de Salida:</label>
+          <input
+            type="text"
+            name="salida"
+            value={rutaData.salida}
+            onChange={handleChange}
+            required
+          />
 
-        <label>Ruta de Llegada:</label>
-        <input type="text" name="llegada" value={rutaData.llegada} onChange={handleChange} required />
+          <label>Ruta de Llegada:</label>
+          <input
+            type="text"
+            name="llegada"
+            value={rutaData.llegada}
+            onChange={handleChange}
+            required
+          />
 
-        <label>Número de Ruta:</label>
-        <input type="number" name="numeroRuta" value={rutaData.numeroRuta} onChange={handleChange} required />
+          <label>Número de Ruta:</label>
+          <input
+            type="number"
+            name="numeroRuta"
+            value={rutaData.numeroRuta}
+            onChange={handleChange}
+            required
+          />
 
-        <label>Precio:</label>
-        <input type="number" name="precio" value={rutaData.precio} onChange={handleChange} required />
+          <label>Precio:</label>
+          <input
+            type="number"
+            name="precio"
+            value={rutaData.precio}
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit" className="submit-button">Agregar Ruta</button>
-      </form>
+          <button type="submit" className="btn">Agregar Ruta</button>
+        </form>
 
-      {/* Botón para regresar al Módulo de Rutas */}
-      <button className="back-button" onClick={() => navigate("/rutas")}>Regresar</button>
+        {/* Botón de regreso */}
+        <button className="btn back-btn" onClick={() => navigate("/rutas")}>
+          Regresar
+        </button>
+      </div>
     </div>
   );
 }

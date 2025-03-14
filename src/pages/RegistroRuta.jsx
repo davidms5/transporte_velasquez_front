@@ -1,22 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./RegistroRuta.css"; // Importamos el CSS
 
 function RegistroRuta() {
   const navigate = useNavigate();
 
-  // Estado para almacenar los datos del formulario
   const [registroData, setRegistroData] = useState({
     chofer: "",
     numeroBus: "",
     placa: "",
   });
 
-  // Manejar cambios en los inputs
   const handleChange = (e) => {
     setRegistroData({ ...registroData, [e.target.name]: e.target.value });
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Registro Guardado: 
@@ -24,31 +22,50 @@ function RegistroRuta() {
     Número de Bus: ${registroData.numeroBus}, 
     Placa: ${registroData.placa}`);
 
-    // Limpiar formulario
     setRegistroData({ chofer: "", numeroBus: "", placa: "" });
   };
 
   return (
-    <div className="form-container">
-      <h2 className="title">Registro de Rutas</h2>
-      <p>Complete los datos del chofer y del bus.</p>
+    <div className="registro-container">
+      <div className="form-box">
+        <h2 className="registro-title">Registro del Conductor</h2>
+        <p className="registro-description">Complete los datos del chofer y del bus.</p>
 
-      {/* Formulario de Registro */}
-      <form onSubmit={handleSubmit}>
-        <label>Nombre del Chofer:</label>
-        <input type="text" name="chofer" value={registroData.chofer} onChange={handleChange} required />
+        <form onSubmit={handleSubmit}>
+          <label>Nombre del Chofer:</label>
+          <input
+            type="text"
+            name="chofer"
+            value={registroData.chofer}
+            onChange={handleChange}
+            required
+          />
 
-        <label>Número de Bus:</label>
-        <input type="number" name="numeroBus" value={registroData.numeroBus} onChange={handleChange} required />
+          <label>Número de Bus:</label>
+          <input
+            type="number"
+            name="numeroBus"
+            value={registroData.numeroBus}
+            onChange={handleChange}
+            required
+          />
 
-        <label>Placa:</label>
-        <input type="text" name="placa" value={registroData.placa} onChange={handleChange} required />
+          <label>Placa:</label>
+          <input
+            type="text"
+            name="placa"
+            value={registroData.placa}
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit" className="submit-button">Registrar</button>
-      </form>
+          <button type="submit" className="btn">Registrar</button>
+        </form>
 
-      {/* Botón para regresar a la página de Rutas */}
-      <button className="back-button" onClick={() => navigate("/rutas")}>Regresar</button>
+        <button className="btn back-btn" onClick={() => navigate("/rutas")}>
+          Regresar
+        </button>
+      </div>
     </div>
   );
 }

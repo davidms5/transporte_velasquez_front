@@ -1,40 +1,34 @@
 import { useNavigate } from "react-router-dom";
+import "./Rutas.css"; // Importamos el CSS
 
 function Rutas() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h2 className="title">Módulo de Rutas</h2>
-      <p>Gestiona las rutas del transporte.</p>
+    <div className="rutas-container">
+      <h1 className="rutas-title">Módulo de Rutas</h1>
+      <p className="rutas-description">Gestiona las rutas del transporte.</p>
 
-      {/* Botón para ir a la página de Registro de Rutas */}
-      <button className="module-button" onClick={() => navigate("/registro-ruta")}>
-        Registro
-      </button>
-
-      {/* Botón para ir a la página de Agregar Ruta */}
-      <button className="module-button" onClick={() => navigate("/agregar-ruta")}>
-        Agregar Ruta
-      </button>
-
-      {/* Botón para ir a la página de Asignación de Rutas */}
-      <button className="module-button" onClick={() => navigate("/asignacion-rutas")}>
-        Asignación de Rutas
-      </button>
-
-      {/* Botón para ir al submódulo Horario */}
-      <button className="module-button" onClick={() => navigate("/horario")}>
-        Horario
-      </button>
-
-      {/* Botón para ir al submódulo Historial de Rutas */}
-      <button className="module-button" onClick={() => navigate("/historial-rutas")}>
-        Historial de Rutas
-      </button>
-
-      {/* Botón para regresar a la página de Inicio */}
-      <button className="back-button" onClick={() => navigate("/inicio")}>Regresar</button>
+      <div className="rutas-buttons">
+        <button className="rutas-button" onClick={() => navigate("/registro-ruta")}>
+          Registro
+        </button>
+        <button className="rutas-button" onClick={() => navigate("/agregar-ruta")}>
+          Agregar Ruta
+        </button>
+        <button className="rutas-button" onClick={() => navigate("/asignacion-rutas")}>
+          Asignación de Rutas
+        </button>
+        <button className="rutas-button" onClick={() => navigate("/horario")}>
+          Horario
+        </button>
+        <button className="rutas-button" onClick={() => navigate("/historial-rutas")}>
+          Historial de Rutas
+        </button>
+        <button className="back-button" onClick={() => navigate("/inicio")}>
+          Regresar
+        </button>
+      </div>
     </div>
   );
 }

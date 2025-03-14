@@ -1,0 +1,72 @@
+/* Fondo elegante con degradado azul */
+.rutas-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* Azul oscuro a más claro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Título principal */
+  .rutas-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #FFD700; /* Dorado */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    margin-bottom: 15px;
+  }
+  
+  /* Descripción */
+  .rutas-description {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Contenedor de botones */
+  .rutas-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Botones principales */
+  .rutas-button {
+    background-color: #FF5733; /* Naranja vibrante */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 250px;
+  }
+  
+  .rutas-button:hover {
+    background-color: #C70039; /* Rojo oscuro */
+    transform: scale(1.1); /* Efecto de agrandado */
+  }
+  
+  /* Botón de regresar */
+  .back-button {
+    background-color: #ffcc00; /* Amarillo */
+    color: #333;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+  }
+  
+  .back-button:hover {
+    background-color: #e6b800; /* Amarillo más oscuro */
+    transform: scale(1.1);
+  }
+  

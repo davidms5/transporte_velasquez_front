@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./HistorialRutas.css"; // Importamos los estilos CSS
 
 function HistorialRutas() {
   const navigate = useNavigate();
@@ -21,56 +22,64 @@ function HistorialRutas() {
   }, []);
 
   return (
-    <div className="form-container">
-      <h2 className="title">Historial de Rutas</h2>
-      <p>Visualiza el historial completo de las rutas, asignaciones y horarios.</p>
+    <div className="historial-container">
+      <div className="historial-box">
+        <h2 className="historial-title">Historial de Rutas</h2>
+        <p className="historial-description">Visualiza el historial completo de las rutas, asignaciones y horarios.</p>
 
-      {/* Mostrar Rutas */}
-      <h3>Rutas Agregadas:</h3>
-      {rutas.length > 0 ? (
-        <ul>
-          {rutas.map((ruta, index) => (
-            <li key={index}>
-              {`Ruta ${ruta.numeroRuta}: ${ruta.salida} - ${ruta.llegada}, Precio: ${ruta.precio}`}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No hay rutas agregadas.</p>
-      )}
+        {/* Mostrar Rutas */}
+        <div className="historial-section">
+          <h3>Rutas Agregadas:</h3>
+          {rutas.length > 0 ? (
+            <ul>
+              {rutas.map((ruta, index) => (
+                <li key={index}>
+                  {`Ruta ${ruta.numeroRuta}: ${ruta.salida} - ${ruta.llegada}, Precio: ${ruta.precio}`}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay rutas agregadas.</p>
+          )}
+        </div>
 
-      {/* Mostrar Asignaciones */}
-      <h3>Asignaciones de Rutas:</h3>
-      {asignaciones.length > 0 ? (
-        <ul>
-          {asignaciones.map((asignacion, index) => (
-            <li key={index}>
-              {`Ruta ${asignacion.rutaSeleccionada}, Conductor: ${asignacion.conductor}, Precio: ${asignacion.precio}`}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No hay asignaciones registradas.</p>
-      )}
+        {/* Mostrar Asignaciones */}
+        <div className="historial-section">
+          <h3>Asignaciones de Rutas:</h3>
+          {asignaciones.length > 0 ? (
+            <ul>
+              {asignaciones.map((asignacion, index) => (
+                <li key={index}>
+                  {`Ruta ${asignacion.rutaSeleccionada}, Conductor: ${asignacion.conductor}, Precio: ${asignacion.precio}`}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay asignaciones registradas.</p>
+          )}
+        </div>
 
-      {/* Mostrar Horarios */}
-      <h3>Horarios Asignados:</h3>
-      {horarios.length > 0 ? (
-        <ul>
-          {horarios.map((horario, index) => (
-            <li key={index}>
-              {`Ruta ${horario.rutaSeleccionada}, Horario: ${horario.horarioSeleccionado}, Número de Bus: ${horario.numeroBus}`}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No hay horarios asignados.</p>
-      )}
+        {/* Mostrar Horarios */}
+        <div className="historial-section">
+          <h3>Horarios Asignados:</h3>
+          {horarios.length > 0 ? (
+            <ul>
+              {horarios.map((horario, index) => (
+                <li key={index}>
+                  {`Ruta ${horario.rutaSeleccionada}, Horario: ${horario.horarioSeleccionado}, Número de Bus: ${horario.numeroBus}`}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay horarios asignados.</p>
+          )}
+        </div>
 
-      {/* Botón para regresar */}
-      <button className="back-button" onClick={() => navigate("/rutas")}>
-        Regresar
-      </button>
+        {/* Botón para regresar */}
+        <button className="btn back-btn" onClick={() => navigate("/rutas")}>
+          Regresar
+        </button>
+      </div>
     </div>
   );
 }

@@ -6,8 +6,11 @@ function Inicio() {
 
   return (
     <div className="inicio-page">
-      <h2 className="title">Bienvenido a la Página de Inicio</h2>
-      <p className="description">¡Selecciona un módulo para continuar!</p>
+      {/* Título principal arriba */}
+      <h1 className="main-title">Bienvenido Transporte Velásquez</h1>
+
+      {/* Subtítulo con la instrucción */}
+      <h2 className="subtitle">Seleccione el módulo que desea acceder</h2>
 
       {/* Botón para ir al módulo de Repuestos */}
       <button className="module-button" onClick={() => navigate("/repuestos")}>
