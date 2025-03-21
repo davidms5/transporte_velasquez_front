@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
 
 function Login() {
   const navigate = useNavigate();
@@ -29,21 +28,23 @@ function Login() {
     try {
       const response = await axios.post("http://localhost:8000/api/usuarios/login/", 
           { username, password },
-          { withCredentials: true,  }  // Permite el uso de cookies para la sesión
+          { withCredentials: true }  // Permite el uso de cookies para la sesión
       );
       console.log(response.data);
-      if (response.data.redirect) {
-          // Si el backend indica que debe redirigir al admin panel
-
-          window.location.href = `http://127.0.0.1:8000${response.data.redirect}`;
-          return;
-      } else {
-          // Si es un usuario normal, redirigir a su dashboard
-          navigate("/inicio");
-      }
+      sessionStorage.setItem('access_token', response.data.access);
+      navigate("/inicio");
+      //if (response.data.redirect) {
+      //    // Si el backend indica que debe redirigir al admin panel
+//
+      //    window.location.href = `http://127.0.0.1:8000${response.data.redirect}`;
+      //    return;
+      //} else {
+      //    // Si es un usuario normal, redirigir a su dashboard
+      //    navigate("/inicio");
+      //}
 
   } catch (error) {
-      setError("Credenciales incorrectas, inténtalo de nuevo.");
+      //setError("Credenciales incorrectas, inténtalo de nuevo.");
       console.error("Error de login:", error);
   }
     
@@ -56,7 +57,7 @@ function Login() {
         <input
           type="text"
           placeholder="Usuario"
-          value={user}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
