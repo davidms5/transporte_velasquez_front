@@ -1,0 +1,77 @@
+.resumen-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .resumen-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 900px;
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  .resumen-title {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+  }
+  
+  .btn {
+    background-color: #4facfe;
+    border: none;
+    padding: 12px 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #00c6fb;
+  }
+  
+  .resumen-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .resumen-table th,
+  .resumen-table td {
+    border: 1px solid white;
+    padding: 10px;
+    font-size: 1rem;
+    color: white;
+  }
+  
+  .resumen-table th {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  

@@ -21,6 +21,11 @@ function Inicio() {
       <button className="module-button" onClick={() => navigate("/rutas")}>
         Módulo de Rutas
       </button>
+
+      {/* ✅ Nuevo Botón para ir al módulo de Ventas */}
+      <button className="module-button" onClick={() => navigate("/ventas")}>
+        Módulo de Ventas
+      </button>
     </div>
   );
 }

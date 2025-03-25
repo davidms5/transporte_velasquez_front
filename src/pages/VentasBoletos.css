@@ -1,0 +1,90 @@
+/* Fondo elegante con degradado */
+.ventas-boletos-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Azul oscuro degradado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgb(212, 187, 154);
+    padding: 20px;
+}
+
+/* Caja del formulario ajustada a toda la pantalla */
+.ventas-boletos-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    width: 90vw;
+    max-width: 600px;
+}
+
+/* Título */
+.ventas-boletos-title {
+    font-size: 2.5rem;
+    color: #978a3e; /* Dorado */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+
+/* Descripción */
+.ventas-boletos-description {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-weight: bold;
+    margin: 15px 0 8px;
+    color: rgb(199, 191, 191);
+    font-size: 1.2rem;
+}
+
+/* Campos de entrada y selects */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(158, 165, 170);
+    outline: none;
+    text-align: center;
+}
+
+/* Botones */
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: #4facfe; /* Azul celeste */
+    border: none;
+    border-radius: 8px;
+    color: rgb(124, 112, 112);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #00c6fb;
+    transform: scale(1.08);
+}
+
+/* Botón de regresar */
+.back-btn {
+    background: #ff6b6b;
+    margin-top: 15px;
+    font-size: 1.2rem;
+}
+
+.back-btn:hover {
+    background: #ff4f4f;
+}

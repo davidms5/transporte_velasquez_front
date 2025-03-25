@@ -1,0 +1,61 @@
+.reporte-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* Azul degradado elegante */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    flex-direction: column;
+  }
+  
+  .reporte-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .reporte-title {
+    font-size: 2rem;
+    color: #FFD700; /* Dorado */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 15px;
+  }
+  
+  .reporte-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .reporte-list li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    font-size: 1.2rem;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+  
+  .back-btn {
+    background: #e74c3c;
+    color: white;
+  }
+  
+  .back-btn:hover {
+    background: #c0392b;
+  }
+  

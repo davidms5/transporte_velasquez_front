@@ -15,6 +15,13 @@ import Horario from "./pages/Horario";
 import HistorialRutas from "./pages/HistorialRutas";
 import ExistenciaRepuestos from "./pages/ExistenciaRepuestos";
 import Facturacion from "./pages/Facturacion";
+import Ventas from "./pages/Ventas";
+import VentasBoletos from "./pages/VentasBoletos";
+import VentasFactura from "./pages/VentasFactura";
+import AnularFacturas from "./pages/AnularFacturas";
+import ReporteVentas from "./pages/ReporteVentas";
+import CierreDiario from "./pages/CierreDiario";
+import ResumenPorRuta from "./pages/ResumenPorRuta";
 
 function App() {
   return (
@@ -35,6 +42,13 @@ function App() {
         <Route path="/historial-rutas" element={<HistorialRutas />} />
         <Route path="/existencia-repuestos" element={<ExistenciaRepuestos />} />
         <Route path="/facturacion" element={<Facturacion />} />
+        <Route path="/ventas" element={<Ventas />} />
+        <Route path="/ventas-boletos" element={<VentasBoletos />} />
+        <Route path="/ventas-factura" element={<VentasFactura />} />
+        <Route path="/anular-facturas" element={<AnularFacturas />} />
+        <Route path="/reporte-ventas" element={<ReporteVentas />} />
+        <Route path="/cierre-diario" element={<CierreDiario />} />
+        <Route path="/resumen-por-ruta" element={<ResumenPorRuta />} />
       </Routes>
     </Router>
   );

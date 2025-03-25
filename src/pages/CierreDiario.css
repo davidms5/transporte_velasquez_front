@@ -1,0 +1,162 @@
+/* Fondo elegante para el módulo de cierre diario */
+.cierre-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); /* Degradado multicolor más atractivo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .cierre-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    width: 95vw;
+    max-width: 850px;
+  }
+  
+  .cierre-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffe082; /* Amarillo claro */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1px;
+  }
+  
+  .cierre-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .cierre-table th,
+  .cierre-table td {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+  
+  .cierre-table th {
+    background-color: rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .cierre-resumen {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff9c4;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #00b4db, #0083b0);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn:hover {
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    transform: scale(1.05);
+  }
+  
+  .back-btn {
+    background: #ff5252;
+    margin-top: 12px;
+  }
+  
+  .back-btn:hover {
+    background: #e53935;
+  }
+  
+  /* Estilo para el nuevo submódulo Administrador de Cierre */
+  .admin-cierre-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, #1d2b64, #f8cdda);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .admin-cierre-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 14px;
+    width: 95vw;
+    max-width: 900px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .admin-cierre-box h2 {
+    font-size: 2.3rem;
+    color: #ffeb3b;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  }
+  
+  .admin-cierre-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  .admin-cierre-table th,
+  .admin-cierre-table td {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .admin-cierre-table th {
+    background-color: rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+  }
+  
+  .admin-cierre-actions button {
+    margin: 0 5px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .admin-cierre-actions .edit-btn {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .admin-cierre-actions .delete-btn {
+    background-color: #f44336;
+    color: #fff;
+  }
