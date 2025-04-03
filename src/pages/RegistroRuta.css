@@ -48,7 +48,7 @@
   input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
@@ -90,3 +90,24 @@
     background: #ff4f4f;
   }
   
+  /* Nueva fila con dos columnas lado a lado */
+.form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Sección izquierda o derecha */
+.form-section {
+  flex: 1 1 200px;
+  min-width: 250px;
+}
+
+/* Ampliar form-box para más espacio */
+.form-box {
+  width: 90%;
+  max-width: 900px;
+  padding: 30px;
+}

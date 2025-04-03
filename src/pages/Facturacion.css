@@ -68,3 +68,40 @@
     background-color: #E63E00;
   }
   
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  }
+  
+  .modal-content input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .save-button, .cancel-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  

@@ -1,28 +1,77 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegistroRuta.css"; // Importamos el CSS
+import { apiClient } from "../shared/services/apiClient";
 
 function RegistroRuta() {
   const navigate = useNavigate();
 
+  //const [registroData, setRegistroData] = useState({
+  //  chofer: "",
+  //  numeroBus: "",
+  //  placa: "",
+  //});
+
   const [registroData, setRegistroData] = useState({
-    chofer: "",
-    numeroBus: "",
-    placa: "",
+    conductor: {
+      nombre: "",
+      numero_licencia: "",
+      dpi: "",
+      expiracion_licencia: "",
+    },
+    bus: {
+      numero_id: "",
+      modelo: "",
+    }
   });
 
-  const handleChange = (e) => {
-    setRegistroData({ ...registroData, [e.target.name]: e.target.value });
+  //const handleChange = (e) => {
+  //  setRegistroData({ ...registroData, [e.target.name]: e.target.value });
+  //};
+
+  const handleChange = (e, grupo) => {
+    setRegistroData((prev) => ({
+      ...prev,
+      [grupo]: {
+        ...prev[grupo],
+        [e.target.name]: e.target.value
+      }
+    }));
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Registro Guardado: 
-    Chofer: ${registroData.chofer}, 
-    Número de Bus: ${registroData.numeroBus}, 
-    Placa: ${registroData.placa}`);
 
-    setRegistroData({ chofer: "", numeroBus: "", placa: "" });
+    try {
+      const response = await apiClient.post(
+        "/rutas-buses/registro/conductor-bus/",  // Cambia la URL según tu backend
+        registroData
+      );
+  
+      alert("Registro exitoso: " + response.data.message);
+      setRegistroData({
+        conductor: {
+          nombre: "",
+          numero_licencia: "",
+          dpi: "",
+          expiracion_licencia: "",
+        },
+        bus: {
+          numero_id: "",
+          modelo: "",
+        },
+      });
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      alert("Error al registrar. Revisa los datos.");
+    }
+
+    //alert(`Registro Guardado: 
+    //Chofer: ${registroData.chofer}, 
+    //Número de Bus: ${registroData.numeroBus}, 
+    //Placa: ${registroData.placa}`);
+
+    //setRegistroData({ chofer: "", numeroBus: "", placa: "" });
   };
 
   return (
@@ -32,32 +81,33 @@ function RegistroRuta() {
         <p className="registro-description">Complete los datos del chofer y del bus.</p>
 
         <form onSubmit={handleSubmit}>
-          <label>Nombre del Chofer:</label>
-          <input
-            type="text"
-            name="chofer"
-            value={registroData.chofer}
-            onChange={handleChange}
-            required
-          />
+        <div className="form-row">
+          {/* Columna del Conductor */}
+          <div className="form-section">
+            <h3>Datos del Conductor</h3>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" value={registroData.conductor.nombre} onChange={(e) => handleChange(e, "conductor")} required />
 
-          <label>Número de Bus:</label>
-          <input
-            type="number"
-            name="numeroBus"
-            value={registroData.numeroBus}
-            onChange={handleChange}
-            required
-          />
+            <label>No. de Licencia:</label>
+            <input type="text" name="numero_licencia" value={registroData.conductor.numero_licencia} onChange={(e) => handleChange(e, "conductor")} required />
 
-          <label>Placa:</label>
-          <input
-            type="text"
-            name="placa"
-            value={registroData.placa}
-            onChange={handleChange}
-            required
-          />
+            <label>DPI:</label>
+            <input type="text" name="dpi" value={registroData.conductor.dpi} onChange={(e) => handleChange(e, "conductor")} required />
+
+            <label>Fecha de Expiración:</label>
+            <input type="date" name="expiracion_licencia" value={registroData.conductor.expiracion_licencia} onChange={(e) => handleChange(e, "conductor")} required />
+          </div>
+
+          {/* Columna del Bus */}
+          <div className="form-section">
+            <h3>Datos del Bus</h3>
+            <label>Número del Bus:</label>
+            <input type="text" name="numero_id" value={registroData.bus.numero_id} onChange={(e) => handleChange(e, "bus")} required />
+
+            <label>Modelo:</label>
+            <input type="text" name="modelo" value={registroData.bus.modelo} onChange={(e) => handleChange(e, "bus")} required />
+          </div>
+        </div>
 
           <button type="submit" className="btn">Registrar</button>
         </form>

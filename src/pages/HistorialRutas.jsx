@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HistorialRutas.css"; // Importamos los estilos CSS
+import { apiClient } from "../shared/services/apiClient";
 
 function HistorialRutas() {
   const navigate = useNavigate();
@@ -9,16 +10,54 @@ function HistorialRutas() {
   const [rutas, setRutas] = useState([]);
   const [asignaciones, setAsignaciones] = useState([]);
   const [horarios, setHorarios] = useState([]);
+  const [desde, setDesde] = useState("");
+  const [hasta, setHasta] = useState("");
 
   // Cargar datos desde localStorage al cargar el componente
-  useEffect(() => {
-    const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
-    const asignacionesGuardadas = JSON.parse(localStorage.getItem("asignaciones")) || [];
-    const horariosGuardados = JSON.parse(localStorage.getItem("horarios")) || [];
+  //useEffect(() => {
+  //  const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
+  //  const asignacionesGuardadas = JSON.parse(localStorage.getItem("asignaciones")) || [];
+  //  const horariosGuardados = JSON.parse(localStorage.getItem("horarios")) || [];
+//
+  //  setRutas(rutasGuardadas);
+  //  setAsignaciones(asignacionesGuardadas);
+  //  setHorarios(horariosGuardados);
+  //}, []);
+  const fetchHistorial = async () => {
+  
+    let url = "/rutas-buses/historial/rutas/";
+    const params = [];
 
-    setRutas(rutasGuardadas);
-    setAsignaciones(asignacionesGuardadas);
-    setHorarios(horariosGuardados);
+    if (desde) params.push(`desde=${desde}`);
+    if (hasta) params.push(`hasta=${hasta}`);
+    if (params.length > 0) url += `?${params.join("&")}`;
+
+    try {
+      
+      const response = await apiClient.get(url);
+
+      const data = response.data;
+      setRutas(data.rutas_agregadas || []);
+      setAsignaciones(data.asignaciones_rutas || []);
+      setHorarios(data.horarios_asignados || []);
+    } catch (error) {
+      console.error("Error cargando historial:", error);
+    }
+  };
+
+  const diasMap = { //TODO: mover despues a utils
+    LUN: "Lunes",
+    MAR: "Martes",
+    MIE: "Miércoles",
+    JUE: "Jueves",
+    VIE: "Viernes",
+    SAB: "Sábado",
+    DOM: "Domingo"
+  };
+
+  useEffect(() => {
+  
+    fetchHistorial();
   }, []);
 
   return (
@@ -27,6 +66,16 @@ function HistorialRutas() {
         <h2 className="historial-title">Historial de Rutas</h2>
         <p className="historial-description">Visualiza el historial completo de las rutas, asignaciones y horarios.</p>
 
+        <div className="historial-filtros">
+          <label>Desde:</label>
+          <input type="date" value={desde} onChange={(e) => setDesde(e.target.value)} />
+
+          <label>Hasta:</label>
+          <input type="date" value={hasta} onChange={(e) => setHasta(e.target.value)} />
+
+          <button className="btn" onClick={fetchHistorial}>Filtrar</button>
+        </div>
+
         {/* Mostrar Rutas */}
         <div className="historial-section">
           <h3>Rutas Agregadas:</h3>
@@ -34,7 +83,7 @@ function HistorialRutas() {
             <ul>
               {rutas.map((ruta, index) => (
                 <li key={index}>
-                  {`Ruta ${ruta.numeroRuta}: ${ruta.salida} - ${ruta.llegada}, Precio: ${ruta.precio}`}
+                  {`Ruta ${ruta.numero_ruta}: ${ruta.origen} - ${ruta.destino}, Precio: ${ruta.precio}`}
                 </li>
               ))}
             </ul>
@@ -50,7 +99,7 @@ function HistorialRutas() {
             <ul>
               {asignaciones.map((asignacion, index) => (
                 <li key={index}>
-                  {`Ruta ${asignacion.rutaSeleccionada}, Conductor: ${asignacion.conductor}, Precio: ${asignacion.precio}`}
+                  {`Ruta ${asignacion.numero_ruta}, Conductor: ${asignacion.conductor}`}
                 </li>
               ))}
             </ul>
@@ -66,7 +115,7 @@ function HistorialRutas() {
             <ul>
               {horarios.map((horario, index) => (
                 <li key={index}>
-                  {`Ruta ${horario.rutaSeleccionada}, Horario: ${horario.horarioSeleccionado}, Número de Bus: ${horario.numeroBus}`}
+                  {`${horario.ruta}, ${horario.bus}, Día: ${diasMap[horario.dia]}, ${horario.hora_salida} - ${horario.hora_llegada}`}
                 </li>
               ))}
             </ul>

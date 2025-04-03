@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./RegistroRepuesto.css"; // Importamos el CSS
 import { useState } from "react";
+import {apiClient, getCookie} from "../shared/services/apiClient";
 
 function RegistroRepuesto() {
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
-    id: "",
-    codigoFactura: "", // Ahora es editable
+    repuesto_id: "", //esto es opcional
+    factura_codigo: "", // Ahora es editable
     nombre: "",
     cantidad: "",
     descripcion: "",
@@ -17,12 +18,21 @@ function RegistroRepuesto() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    //{withCredentials: true}
     
-    console.log("Nuevo Repuesto Registrado:", formData);
+    try {
+      const token = getCookie("jwt");
+      await apiClient.post("/inventario/registrar-repuesto/", formData );
+      console.log("Nuevo Repuesto Registrado:", formData);
+      navigate("/existencia-repuestos");
+    } catch (error) {
+      console.error("Error al registrar el repuesto:", error);
+      alert("Error al registrar el repuesto. Por favor, inténtelo de nuevo."); //TODO: mejorar las alertas
+      
+    }
     
-    navigate("/existencia-repuestos");
   };
 
   return (
@@ -31,9 +41,9 @@ function RegistroRepuesto() {
       <p>Ingresa los datos del nuevo repuesto.</p>
 
       <form className="registro-form" onSubmit={handleSubmit}>
-        <input type="number" name="id" placeholder="ID del Repuesto" required value={formData.id} onChange={handleChange} />
+        <input type="number" name="repuesto_id" placeholder="ID del Repuesto" value={formData.repuesto_id} onChange={handleChange} />
 
-        <input type="text" name="codigoFactura" placeholder="Código de Factura" required value={formData.codigoFactura} onChange={handleChange} />
+        <input type="text" name="factura_codigo" placeholder="Código de Factura" required value={formData.factura_codigo} onChange={handleChange} />
 
         <input type="text" name="nombre" placeholder="Nombre del repuesto" required value={formData.nombre} onChange={handleChange} />
 

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AsignacionRutas.css"; // Importamos los estilos CSS
-
+import { apiClient } from "../shared/services/apiClient";
+import formatCurrency from "../shared/utils/convertir_divisa"; // Importa la función de formato de moneda
 function AsignacionRutas() {
   const navigate = useNavigate();
 
@@ -14,22 +15,41 @@ function AsignacionRutas() {
   });
 
   // Conductores disponibles
-  const conductores = ["Juan Pérez", "María López", "Carlos Sánchez"];
+  //const conductores = ["Juan Pérez", "María López", "Carlos Sánchez"];
+  const [conductores, setConductores] = useState([]);
 
-  // Cargar rutas desde localStorage
   useEffect(() => {
-    const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
-    setRutas(rutasGuardadas);
+    const fetchData = async () => {
+
+      try {
+        const res = await apiClient.get("/rutas-buses/rutas/datos-asignacion/");
+
+        setRutas(res.data.rutas_sin_conductor);
+        setConductores(res.data.conductores_disponibles);
+      } catch (error) {
+        console.error("Error al cargar datos:", error);
+        alert("Error al obtener datos de asignación.");
+      }
+    };
+
+    fetchData();
   }, []);
+  // Cargar rutas desde localStorage
+  //useEffect(() => {
+  //  const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
+  //  setRutas(rutasGuardadas);
+  //}, []);
 
   // Manejar selección de ruta
   const handleRutaChange = (e) => {
-    const rutaSeleccionada = rutas.find((ruta) => ruta.numeroRuta === e.target.value);
-    setAsignacion({
-      ...asignacion,
-      rutaSeleccionada: e.target.value,
+    const value = e.target.value;
+    const rutaSeleccionada = rutas.find((ruta) => String(ruta.numero_ruta) === value);
+  
+    setAsignacion((prev) => ({
+      ...prev,
+      rutaSeleccionada: value,
       precio: rutaSeleccionada ? rutaSeleccionada.precio : "",
-    });
+    }));
   };
 
   // Manejar selección de conductor y otros campos
@@ -38,15 +58,28 @@ function AsignacionRutas() {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Asignación realizada: 
-    Ruta: ${asignacion.rutaSeleccionada}, 
-    Conductor: ${asignacion.conductor}, 
-    Precio: ${asignacion.precio}`);
 
-    // Limpiar formulario
-    setAsignacion({ rutaSeleccionada: "", conductor: "", precio: "" });
+    try {
+      apiClient.put(`/rutas-buses/rutas/${asignacion.rutaSeleccionada}/asignar-conductor/`, {
+        conductor: asignacion.conductor
+      });
+
+      alert("Asignación realizada correctamente.");
+            // Limpiar formulario
+      setRutas(rutas.filter((r) => r.numero_ruta !== asignacion.rutaSeleccionada));
+      setAsignacion({ rutaSeleccionada: "", conductor: "", precio: "" });
+    } catch (error) {
+      console.error("Error al asignar ruta:", error);
+      alert("No se pudo realizar la asignación.");
+    }
+    //alert(`Asignación realizada: 
+    //Ruta: ${asignacion.rutaSeleccionada}, 
+    //Conductor: ${asignacion.conductor}, 
+    //Precio: ${asignacion.precio}`);
+
+
   };
 
   return (
@@ -60,8 +93,8 @@ function AsignacionRutas() {
           <select name="rutaSeleccionada" value={asignacion.rutaSeleccionada} onChange={handleRutaChange} required>
             <option value="">Seleccione una ruta</option>
             {rutas.map((ruta, index) => (
-              <option key={index} value={ruta.numeroRuta}>
-                {`${ruta.salida} - ${ruta.llegada} (Ruta ${ruta.numeroRuta})`}
+              <option key={index} value={ruta.numero_ruta}>
+                {`${ruta.origen} - ${ruta.destino} (Ruta ${ruta.numero_ruta})`}
               </option>
             ))}
           </select>
@@ -70,12 +103,12 @@ function AsignacionRutas() {
           <select name="conductor" value={asignacion.conductor} onChange={handleChange} required>
             <option value="">Seleccione un conductor</option>
             {conductores.map((conductor, index) => (
-              <option key={index} value={conductor}>{conductor}</option>
+              <option key={index} value={conductor.id}>{conductor.nombre}</option>
             ))}
           </select>
 
           <label>Precio:</label>
-          <input type="text" name="precio" value={asignacion.precio} readOnly />
+          <input type="text" name="precio" value={formatCurrency(asignacion.precio || 0)} readOnly />
 
           <button type="submit" className="btn">Asignar Ruta</button>
         </form>

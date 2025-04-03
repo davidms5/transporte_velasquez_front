@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AgregarRuta.css"; // Importamos los estilos CSS
+import { apiClient } from "../shared/services/apiClient";
 
 function AgregarRuta() {
   const navigate = useNavigate();
 
   // Estado para almacenar los datos del formulario
   const [rutaData, setRutaData] = useState({
-    salida: "",
-    llegada: "",
-    numeroRuta: "",
+    origen: "",
+    destino: "",
+    numero_ruta: "",
     precio: "",
   });
 
@@ -19,22 +20,34 @@ function AgregarRuta() {
   };
 
   // Manejar el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    alert(`Ruta Agregada: 
-    Salida: ${rutaData.salida}, 
-    Llegada: ${rutaData.llegada}, 
-    Número de Ruta: ${rutaData.numeroRuta},
-    Precio: ${rutaData.precio}`);
+    try {
+      const response = await apiClient.post(
+        "/rutas-buses/rutas/crear/", // Asegúrate de usar tu endpoint real
+        rutaData
+      );
 
-    // Guardar la ruta en localStorage
-    const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
-    rutasGuardadas.push(rutaData);
-    localStorage.setItem("rutas", JSON.stringify(rutasGuardadas));
-
-    // Limpiar formulario
-    setRutaData({ salida: "", llegada: "", numeroRuta: "", precio: "" });
+      alert("Ruta agregada correctamente.");
+      setRutaData({ origen: "", destino: "", numero_ruta: "", precio: "" });
+    } catch (error) {
+      console.error("Error al agregar la ruta:", error);
+      alert("Error al agregar la ruta. Verifica los datos.");
+    }
+    //alert(`Ruta Agregada: 
+    //Salida: ${rutaData.salida}, 
+    //Llegada: ${rutaData.llegada}, 
+    //Número de Ruta: ${rutaData.numeroRuta},
+    //Precio: ${rutaData.precio}`);
+//
+    //// Guardar la ruta en localStorage
+    //const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
+    //rutasGuardadas.push(rutaData);
+    //localStorage.setItem("rutas", JSON.stringify(rutasGuardadas));
+//
+    //// Limpiar formulario
+    //setRutaData({ salida: "", llegada: "", numeroRuta: "", precio: "" });
   };
 
   return (
@@ -48,8 +61,8 @@ function AgregarRuta() {
           <label>Ruta de Salida:</label>
           <input
             type="text"
-            name="salida"
-            value={rutaData.salida}
+            name="origen"
+            value={rutaData.origen}
             onChange={handleChange}
             required
           />
@@ -57,8 +70,8 @@ function AgregarRuta() {
           <label>Ruta de Llegada:</label>
           <input
             type="text"
-            name="llegada"
-            value={rutaData.llegada}
+            name="destino"
+            value={rutaData.destino}
             onChange={handleChange}
             required
           />
@@ -66,8 +79,8 @@ function AgregarRuta() {
           <label>Número de Ruta:</label>
           <input
             type="number"
-            name="numeroRuta"
-            value={rutaData.numeroRuta}
+            name="numero_ruta"
+            value={rutaData.numero_ruta}
             onChange={handleChange}
             required
           />
