@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import "./Inicio.css"; // Importamos el CSS
+import { useAuth } from "../context/authContext";
 
 function Inicio() {
   const navigate = useNavigate();
+  const {logout} = useAuth(); // TODO: es una funcion, no una variable
 
   return (
     <div className="inicio-page">
@@ -25,6 +27,10 @@ function Inicio() {
       {/* ✅ Nuevo Botón para ir al módulo de Ventas */}
       <button className="module-button" onClick={() => navigate("/ventas")}>
         Módulo de Ventas
+      </button>
+
+      <button className="module-button" onClick={logout}>
+        log out
       </button>
     </div>
   );

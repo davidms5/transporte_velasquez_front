@@ -3,10 +3,11 @@ import { useState } from "react";
 import axios from "axios";
 import "./Login.css"; // Importamos los estilos CSS
 import {apiClient} from "../shared/services/apiClient";
+import { useAuth } from "../context/authContext";
 
 function Login() {
   const navigate = useNavigate();
-
+  const {login} = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,16 +16,16 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await apiClient.post("usuarios/login/", {
+      const response = await apiClient.post("/usuarios/login/", {
         username,
         password,
       },
       {
         withCredentials: true, 
       });
-      sessionStorage.setItem("jwt_token", response.data.access);
+      login(response.data.access);
       //window.location.href = "http://127.0.0.1:8000/admin/";
-      navigate("/inicio"); 
+      //navigate("/inicio"); 
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       alert("Credenciales inválidas o error en el servidor"); //TODO: mejorar las alertas

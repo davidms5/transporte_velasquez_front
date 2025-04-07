@@ -1,12 +1,13 @@
 /* Fondo elegante con degradado */
 .ventas-boletos-container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Azul oscuro degradado */
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     text-align: center;
+    overflow-y: auto;
     color: rgb(212, 187, 154);
     padding: 20px;
 }
@@ -49,8 +50,8 @@ label {
 /* Campos de entrada y selects */
 input, select {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
     border: none;
     border-radius: 8px;
     font-size: 1.2rem;
