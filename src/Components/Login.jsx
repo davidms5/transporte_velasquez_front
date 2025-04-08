@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Login.css"; // Importamos los estilos CSS
 import {apiClient} from "../shared/services/apiClient";
 import { useAuth } from "../context/authContext";
-
+import { toast } from "react-toastify";
 function Login() {
   const navigate = useNavigate();
   const {login} = useAuth();
@@ -28,7 +28,7 @@ function Login() {
       //navigate("/inicio"); 
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
-      alert("Credenciales inválidas o error en el servidor"); //TODO: mejorar las alertas
+      toast.error("Credenciales inválidas o error en el servidor"); //TODO: mejorar las alertas
     }
     //
   };

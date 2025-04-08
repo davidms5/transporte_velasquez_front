@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DarDeBaja.css"; // Importamos el CSS
 import { apiClient } from "../shared/services/apiClient";
+import { toast } from "react-toastify";
 
 function DarDeBaja() {
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ function DarDeBaja() {
         );
       }
 
-      alert(`Se han dado de baja:\n${itemsABajar
+      toast(`Se han dado de baja:\n${itemsABajar
         .map(([id, cantidad]) => `${cantidad} de ${repuestos.find((r) => r.id == id).nombre}`)
         .join("\n")}`);
 

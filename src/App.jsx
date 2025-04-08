@@ -23,10 +23,12 @@ import ReporteVentas from "./pages/ReporteVentas";
 import CierreDiario from "./pages/CierreDiario";
 import ResumenPorRuta from "./pages/ResumenPorRuta";
 import RequireAuth from "./Components/requireAuth";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-
+    <>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -61,7 +63,8 @@ function App() {
         />
 
       </Routes>
-
+      <ToastContainer position="top-right" autoClose={2000} />
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "../shared/services/apiClient";
 import "./VentasBoletos.css";
+import { toast } from "react-toastify";
 
 function VentasBoletos() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function VentasBoletos() {
   const [formData, setFormData] = useState({
     cliente_nombre: "",
     cliente_dpi: "",
-    es_adulto: true,
+    es_adulto: "true",
     partida_nacimiento_id: "",
     responsable_menor: "",
     responsable_dpi: "",
@@ -70,7 +71,7 @@ function VentasBoletos() {
     try {
       const response = await apiClient.get(`/rutas-buses/rutas/${e.target.value}/horarios/`);
       setHorariosRuta(response.data);
-      console.log(response.data, rutaSeleccionada);
+      console.log(response.data, rutaSeleccionada, e.target.value);
     } catch (error) {
       console.error("Error cargando horarios:", error);
       setHorariosRuta([]);
@@ -85,27 +86,51 @@ function VentasBoletos() {
     });
   };
 
+  const handleHorarioChange = (e) => {
+    const value = e.target.value;
+  
+    // Buscar el horario en la lista completa
+    const horarioSeleccionado = horariosRuta.find(
+      (h) => `${h.hora_salida} - ${h.hora_llegada}` === value
+    );
+  
+    setFormData({
+      ...formData,
+      horario: value,
+      horario_ruta_id: horarioSeleccionado ? horarioSeleccionado.id : ""
+    });
+    
+  };
+  
   // Manejar el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     localStorage.setItem("ultimaVenta", JSON.stringify(formData));
 
     try {
       
       const payload = {
-        cliente_nombre: formData.nombreCompleto,
-        cliente_dpi: formData.identidad,
+        cliente_nombre: formData.cliente_nombre,
+        cliente_dpi: formData.cliente_dpi,
         es_adulto: formData.es_adulto === "true" || formData.es_adulto === true,
         precio: parseFloat(formData.precio),
         partida_nacimiento_id: formData.partida_nacimiento_id || null,
         responsable_menor: formData.responsable_menor || null,
         responsable_dpi: formData.responsable_dpi || null,
-        horario_ruta: formData.horario_ruta_id // debe ser el ID numérico del horario seleccionado
+        horario_ruta: formData.horario_ruta_id, // debe ser el ID numérico del horario seleccionado
+        horario: formData.horario,
       };
-      
+
+      const response = await apiClient.post("/ventas/tickets-crear/", payload);
+      payload.numeroFactura = response.data.numero_factura;
+      payload.numero_ruta = formData.numero_ruta;
+      payload.numeroBus = formData.numeroBus;
+      payload.CAI = "Q1W2-E3R4-T5Y6-U7I8-O9P0-ASDF-GHJK"; //TODO: guardar en algun sitiom seguro o variable de entorno
+      localStorage.setItem("ultimaVenta", JSON.stringify(payload));
     } catch (error) {
       console.error("Error al registrar el ticket:", error);
-      alert("Ocurrió un error al registrar la venta. Intenta nuevamente.");
+      toast("Ocurrió un error al registrar la venta. Intenta nuevamente.");
+      return;
     }
 
     navigate("/ventas-factura");
@@ -122,13 +147,13 @@ function VentasBoletos() {
           <label>Número de Identidad:</label>
           <input type="text" name="cliente_dpi" value={formData.cliente_dpi} onChange={handleChange} required />
 
-          <label>¿Es menor de edad?</label>
+          <label>¿Es mayor de edad?</label>
           <select name="es_adulto" value={formData.es_adulto} onChange={handleChange} required>
             <option value={false}>No</option>
             <option value={true}>Sí</option>
           </select>
 
-          {formData.es_adulto === "true" && (
+          {formData.es_adulto === "false" && (
             <>
               <label>Número ID de la Partida de Nacimiento:</label>
               <input type="text" name="partida_nacimiento_id" value={formData.partida_nacimiento_id} onChange={handleChange} required />
@@ -155,7 +180,7 @@ function VentasBoletos() {
           <input type="text" name="numeroBus" value={formData.numeroBus} readOnly />
 
           <label>Horario:</label>
-          <select name="horario" value={formData.horario} onChange={handleChange} required>
+          <select name="horario" value={formData.horario} onChange={handleHorarioChange} required>
             <option value="">Seleccione un horario</option>
             {horariosRuta.map((horario, index) => (
               <option key={index} value={`${horario.hora_salida} - ${horario.hora_llegada}`}>
