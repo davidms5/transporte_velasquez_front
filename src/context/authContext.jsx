@@ -32,12 +32,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     sessionStorage.setItem("jwt_token", token);
+    sessionStorage.setItem("role", jwtDecode(token).role)
     setIsAuthenticated(true);
     navigate("/inicio");
   };
 
   const logout = () => {
     sessionStorage.removeItem("jwt_token");
+    sessionStorage.removeItem("role")
     setIsAuthenticated(false);
     navigate("/");
   };
