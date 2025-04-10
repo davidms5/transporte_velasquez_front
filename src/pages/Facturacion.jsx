@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Facturacion.css"; // Importamos el CSS
 import { apiClient } from "../shared/services/apiClient";
+import { toast } from "react-toastify";
 
 function Facturacion() {
   const [facturas, setFacturas] = useState([]);
@@ -61,10 +62,10 @@ function Facturacion() {
         });
       } catch (error) {
         console.error("Error al agregar la factura:", error);
-        alert("Hubo un error al agregar la factura.");
+        toast("Hubo un error al agregar la factura.");
       }
     } else {
-      alert("Por favor, complete todos los campos.");
+      toast("Por favor, complete todos los campos.");
     }
   };
 

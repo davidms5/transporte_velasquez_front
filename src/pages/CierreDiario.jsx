@@ -1,24 +1,47 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./CierreDiario.css";
+import { apiClient } from "../shared/services/apiClient";
 
 function CierreDiario() {
+  const navigate = useNavigate();
+
   const [factura, setFactura] = useState("");
   const [ruta, setRuta] = useState("");
   const [monto, setMonto] = useState("");
   const [registro, setRegistro] = useState([]);
-  const [mostrarResumen, setMostrarResumen] = useState(false);
+  //const [mostrarResumen, setMostrarResumen] = useState(false);
+  const [resumen, setResumen] = useState(null); // Aquí guardamos la respuesta del backend
+  const [loading, setLoading] = useState(false);
 
   const agregarFactura = () => {
     if (factura && ruta && monto) {
-      setRegistro([...registro, { factura, ruta, monto: parseFloat(monto) }]);
+      setRegistro([...registro, { numero_factura: factura, numero_ruta: ruta, monto: parseFloat(monto) }]);
       setFactura("");
       setRuta("");
       setMonto("");
     }
   };
 
-  const cerrarDia = () => {
-    setMostrarResumen(true);
+  const cerrarDia = async () => {
+    setLoading(true);
+
+    try {
+      
+      const response = await apiClient.post("/ventas/cierre-del-dia/", {
+        facturas_manuales: registro
+      });
+
+      setResumen(response.data);
+    } catch (error) {
+      console.error("Error al generar el cierre:", error);
+      alert("Hubo un error al generar el cierre del día.");
+    } finally {
+      setLoading(false);
+    }
+
+    //setMostrarResumen(true);
   };
 
   return (
@@ -62,8 +85,8 @@ function CierreDiario() {
             <tbody>
               {registro.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.factura}</td>
-                  <td>{item.ruta}</td>
+                  <td>{item.numero_factura}</td>
+                  <td>{item.numero_ruta}</td>
                   <td>L {item.monto.toFixed(2)}</td>
                 </tr>
               ))}
@@ -72,35 +95,36 @@ function CierreDiario() {
         )}
 
         {/* Botón para mostrar el resumen */}
-        {registro.length > 0 && (
-          <button className="btn resumen-btn" onClick={cerrarDia}>Cierre de Día</button>
+        {registro.length > 0 && !resumen && (
+          <button className="btn resumen-btn" onClick={cerrarDia} disabled={loading}>
+            {loading ? "Procesando..." : "Cierre de Día"}
+            </button>
         )}
 
         {/* Resumen final del cierre */}
-        {mostrarResumen && (
+        {resumen && (
           <div className="resumen-final">
-            <h3>Resumen del Cierre del Día</h3>
-            <table className="registro-table">
-              <thead>
-                <tr>
-                  <th>Factura</th>
-                  <th>Ruta</th>
-                  <th>Monto</th>
-                </tr>
-              </thead>
-              <tbody>
-                {registro.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.factura}</td>
-                    <td>{item.ruta}</td>
-                    <td>L {item.monto.toFixed(2)}</td>
-                  </tr>
+          <h3>Resumen del Cierre del Día</h3>
+          <p><strong>Total Facturas:</strong> {resumen.total_facturas}</p>
+          <p><strong>Total Recaudado:</strong> L {parseFloat(resumen.total_monto).toFixed(2)}</p>
+
+          {resumen.nuevas_facturas_manuales?.length > 0 && (
+            <>
+              <h4>Facturas Manuales Agregadas:</h4>
+              <ul>
+                {resumen.nuevas_facturas_manuales.map((f, index) => (
+                  <li key={index}>
+                    {f.numero_factura} - Ruta {f.numero_ruta} - L {parseFloat(f.monto).toFixed(2)}
+                  </li>
                 ))}
-              </tbody>
-            </table>
-            <p><strong>Total Facturas:</strong> {registro.length}</p>
-            <p><strong>Total Recaudado:</strong> L {registro.reduce((acc, curr) => acc + curr.monto, 0).toFixed(2)}</p>
-          </div>
+              </ul>
+            </>
+          )}
+
+          <button className="btn back-btn" onClick={() => navigate("/ventas")}>
+            Volver al Panel
+          </button>
+        </div>
         )}
       </div>
     </div>

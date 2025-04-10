@@ -74,4 +74,14 @@
   .resumen-table th {
     background-color: rgba(255, 255, 255, 0.2);
   }
+
+  .filtro-fecha {
+    margin-top: 15px;
+    text-align: left;
+  }
+  
+  .filtro-fecha label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
   
