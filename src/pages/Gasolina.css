@@ -1,0 +1,57 @@
+/* Gasolina.css */
+
+.gasolina-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #eef2f7;
+  }
+  
+  .gasolina-form {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 400px;
+  }
+  
+  .gasolina-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+  }
+  
+  .gasolina-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #34495e;
+  }
+  
+  .gasolina-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  .gasolina-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60;
+    color: rgb(34, 84, 83);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .gasolina-form button:hover {
+    background-color: #219150;
+  }
+  

@@ -22,6 +22,10 @@ import AnularFacturas from "./pages/AnularFacturas";
 import ReporteVentas from "./pages/ReporteVentas";
 import CierreDiario from "./pages/CierreDiario";
 import ResumenPorRuta from "./pages/ResumenPorRuta";
+import Gastos from "./pages/Gastos"; // ✅ Módulo Gastos
+import Gasolina from "./pages/Gasolina"; // ✅ Submódulo Gasolina
+import GastoCompras from "./pages/GastoCompras"; // ✅ Submódulo Gasto de Compras
+import HistorialGastoCompras from "./pages/HistorialGastoCompras"; // ✅ Nuevo Submódulo Historial Gasto de Compras
 import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,10 +36,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
-        path="/*"
-        element={
-          <RequireAuth>
-            <Routes>
+          path="/*"
+          element={
+            <RequireAuth>
+              <Routes>
                 <Route path="/inicio" element={<Inicio />} />
                 <Route path="/repuestos" element={<Repuestos />} />
                 <Route path="/registro-repuesto" element={<RegistroRepuesto />} />
@@ -57,11 +61,14 @@ function App() {
                 <Route path="/reporte-ventas" element={<ReporteVentas />} />
                 <Route path="/cierre-diario" element={<CierreDiario />} />
                 <Route path="/resumen-por-ruta" element={<ResumenPorRuta />} />
-            </Routes>
-          </RequireAuth>
-        }
+                <Route path="/gastos" element={<Gastos />} /> {/* ✅ Ruta Gastos */}
+                <Route path="/gastos-gasolina" element={<Gasolina />} /> {/* ✅ Submódulo Gasolina */}
+                <Route path="/gastos-compras" element={<GastoCompras />} /> {/* ✅ Submódulo Gasto de Compras */}
+                <Route path="/historial-gasto-compras" element={<HistorialGastoCompras />} /> {/* ✅ Submódulo Historial Gasto de Compras */}
+              </Routes>
+            </RequireAuth>
+          }
         />
-
       </Routes>
       <ToastContainer position="top-right" autoClose={2000} />
     </>

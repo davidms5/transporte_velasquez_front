@@ -1,0 +1,17 @@
+.historial-container {
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .historial-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .historial-table th,
+  .historial-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  

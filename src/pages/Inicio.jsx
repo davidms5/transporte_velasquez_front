@@ -4,7 +4,7 @@ import { useAuth } from "../context/authContext";
 
 function Inicio() {
   const navigate = useNavigate();
-  const {logout} = useAuth(); // TODO: es una funcion, no una variable
+  const { logout } = useAuth();
 
   return (
     <div className="inicio-page">
@@ -24,9 +24,19 @@ function Inicio() {
         Módulo de Rutas
       </button>
 
-      {/* ✅ Nuevo Botón para ir al módulo de Ventas */}
+      {/* Botón para ir al módulo de Ventas */}
       <button className="module-button" onClick={() => navigate("/ventas")}>
         Módulo de Ventas
+      </button>
+
+      {/* ✅ Botón para el módulo de Gastos */}
+      <button className="module-button" onClick={() => navigate("/gastos")}>
+        Módulo de Gastos
+      </button>
+
+      {/* ✅ Nuevo Botón para el módulo de Usuarios */}
+      <button className="module-button" onClick={() => navigate("/usuarios")}>
+        Módulo de Usuarios
       </button>
 
       <button className="module-button" onClick={logout}>
