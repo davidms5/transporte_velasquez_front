@@ -1,0 +1,36 @@
+.dashboard-gastos {
+    padding: 2rem;
+    background-color: #1e1e2f;
+    min-height: 100vh;
+    color: white;
+  }
+  
+  .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-around;
+  }
+  
+  .chart-item {
+    flex: 1 1 40%;
+    background-color: #2c2c3e;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px #000;
+  }
+  
+  .back-btn {
+    margin-top: 2rem;
+    padding: 0.6rem 1.5rem;
+    background-color: #36A2EB;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .back-btn:hover {
+    background-color: #2a82c9;
+  }
+  

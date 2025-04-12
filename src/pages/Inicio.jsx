@@ -34,6 +34,11 @@ function Inicio() {
         Módulo de Gastos
       </button>
 
+      {/* ✅ Nuevo Botón para el módulo de Estadística */}
+      <button className="module-button" onClick={() => navigate("/estadistica")}>
+        Módulo de Estadística
+      </button>
+
       {/* ✅ Nuevo Botón para el módulo de Usuarios */}
       <button className="module-button" onClick={() => navigate("/usuarios")}>
         Módulo de Usuarios

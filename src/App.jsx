@@ -1,3 +1,4 @@
+// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/styles.css";
 import Login from "./Components/Login";
@@ -22,10 +23,12 @@ import AnularFacturas from "./pages/AnularFacturas";
 import ReporteVentas from "./pages/ReporteVentas";
 import CierreDiario from "./pages/CierreDiario";
 import ResumenPorRuta from "./pages/ResumenPorRuta";
-import Gastos from "./pages/Gastos"; // ✅ Módulo Gastos
-import Gasolina from "./pages/Gasolina"; // ✅ Submódulo Gasolina
-import GastoCompras from "./pages/GastoCompras"; // ✅ Submódulo Gasto de Compras
-import HistorialGastoCompras from "./pages/HistorialGastoCompras"; // ✅ Nuevo Submódulo Historial Gasto de Compras
+import Gastos from "./pages/Gastos";
+import Gasolina from "./pages/Gasolina";
+import GastoCompras from "./pages/GastoCompras";
+import HistorialGastoCompras from "./pages/HistorialGastoCompras";
+import Estadistica from "./pages/Estadistica"; // ✅ Nuevo módulo de Estadística
+import DashboardGastos from "./pages/DashboardGastos"; // ✅ Dashboard de Gastos
 import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,10 +64,12 @@ function App() {
                 <Route path="/reporte-ventas" element={<ReporteVentas />} />
                 <Route path="/cierre-diario" element={<CierreDiario />} />
                 <Route path="/resumen-por-ruta" element={<ResumenPorRuta />} />
-                <Route path="/gastos" element={<Gastos />} /> {/* ✅ Ruta Gastos */}
-                <Route path="/gastos-gasolina" element={<Gasolina />} /> {/* ✅ Submódulo Gasolina */}
-                <Route path="/gastos-compras" element={<GastoCompras />} /> {/* ✅ Submódulo Gasto de Compras */}
-                <Route path="/historial-gasto-compras" element={<HistorialGastoCompras />} /> {/* ✅ Submódulo Historial Gasto de Compras */}
+                <Route path="/gastos" element={<Gastos />} />
+                <Route path="/gastos-gasolina" element={<Gasolina />} />
+                <Route path="/gastos-compras" element={<GastoCompras />} />
+                <Route path="/historial-gasto-compras" element={<HistorialGastoCompras />} />
+                <Route path="/estadistica" element={<Estadistica />} /> {/* ✅ Ruta Estadística */}
+                <Route path="/dashboard-gastos" element={<DashboardGastos />} /> {/* ✅ Ruta Dashboard de Gastos */}
               </Routes>
             </RequireAuth>
           }
