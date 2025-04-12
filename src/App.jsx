@@ -1,4 +1,3 @@
-// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/styles.css";
 import Login from "./Components/Login";
@@ -29,6 +28,7 @@ import GastoCompras from "./pages/GastoCompras";
 import HistorialGastoCompras from "./pages/HistorialGastoCompras";
 import Estadistica from "./pages/Estadistica"; // ✅ Nuevo módulo de Estadística
 import DashboardGastos from "./pages/DashboardGastos"; // ✅ Dashboard de Gastos
+import DashboardRutas from "./pages/DashboardRutas"; // ✅ Dashboard de Rutas
 import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -70,6 +70,7 @@ function App() {
                 <Route path="/historial-gasto-compras" element={<HistorialGastoCompras />} />
                 <Route path="/estadistica" element={<Estadistica />} /> {/* ✅ Ruta Estadística */}
                 <Route path="/dashboard-gastos" element={<DashboardGastos />} /> {/* ✅ Ruta Dashboard de Gastos */}
+                <Route path="/dashboard-rutas" element={<DashboardRutas />} /> {/* ✅ Ruta Dashboard de Rutas */}
               </Routes>
             </RequireAuth>
           }

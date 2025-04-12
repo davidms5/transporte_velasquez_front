@@ -1,0 +1,45 @@
+/* src/styles/styles.css */
+
+/* Contenedor del gráfico */
+.chart-container {
+    position: relative;
+    width: 80%; /* Ajustamos el tamaño del gráfico */
+    height: 500px; /* Ajustamos el tamaño para que se vea mejor */
+    margin: 0 auto; /* Centramos el gráfico */
+    display: flex;
+    flex-direction: column; /* Coloca el gráfico y el botón en columna */
+    justify-content: space-between; /* Asegura que el gráfico y el botón estén bien distribuidos */
+    align-items: center; /* Centra el contenido */
+  }
+  
+  /* Estilo del botón de regresar */
+  button.regresar {
+    display: block;
+    width: 200px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px; /* Asegura que el botón esté alejado del gráfico */
+  }
+  
+  button.regresar:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Hace que el botón crezca ligeramente al pasar el ratón */
+  }
+  
+  button.regresar:active {
+    background-color: #004080;
+    transform: scale(1); /* El botón regresa a su tamaño original al hacer clic */
+  }
+  
+  button.regresar:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Agrega un efecto al foco */
+  }
+  
