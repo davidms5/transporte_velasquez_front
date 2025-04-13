@@ -1,30 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./HistorialRutas.css"; // Importamos los estilos CSS
+import "./HistorialRutas.css";
 import { apiClient } from "../shared/services/apiClient";
 
 function HistorialRutas() {
   const navigate = useNavigate();
 
-  // Estado para almacenar datos de rutas, asignaciones y horarios
   const [rutas, setRutas] = useState([]);
   const [asignaciones, setAsignaciones] = useState([]);
   const [horarios, setHorarios] = useState([]);
   const [desde, setDesde] = useState("");
   const [hasta, setHasta] = useState("");
 
-  // Cargar datos desde localStorage al cargar el componente
-  //useEffect(() => {
-  //  const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
-  //  const asignacionesGuardadas = JSON.parse(localStorage.getItem("asignaciones")) || [];
-  //  const horariosGuardados = JSON.parse(localStorage.getItem("horarios")) || [];
-//
-  //  setRutas(rutasGuardadas);
-  //  setAsignaciones(asignacionesGuardadas);
-  //  setHorarios(horariosGuardados);
-  //}, []);
+  // Estados de paginación
+  const [paginaRutas, setPaginaRutas] = useState(1);
+  const [paginaAsignaciones, setPaginaAsignaciones] = useState(1);
+  const [paginaHorarios, setPaginaHorarios] = useState(1);
+  const elementosPorPagina = 5;
+
   const fetchHistorial = async () => {
-  
     let url = "/rutas-buses/historial/rutas/";
     const params = [];
 
@@ -33,19 +27,22 @@ function HistorialRutas() {
     if (params.length > 0) url += `?${params.join("&")}`;
 
     try {
-      
       const response = await apiClient.get(url);
-
       const data = response.data;
       setRutas(data.rutas_agregadas || []);
       setAsignaciones(data.asignaciones_rutas || []);
       setHorarios(data.horarios_asignados || []);
+
+      // Reiniciar páginas al filtrar
+      setPaginaRutas(1);
+      setPaginaAsignaciones(1);
+      setPaginaHorarios(1);
     } catch (error) {
       console.error("Error cargando historial:", error);
     }
   };
 
-  const diasMap = { //TODO: mover despues a utils
+  const diasMap = {
     LUN: "Lunes",
     MAR: "Martes",
     MIE: "Miércoles",
@@ -55,8 +52,12 @@ function HistorialRutas() {
     DOM: "Domingo"
   };
 
+  const paginar = (datos, pagina) => {
+    const inicio = (pagina - 1) * elementosPorPagina;
+    return datos.slice(inicio, inicio + elementosPorPagina);
+  };
+
   useEffect(() => {
-  
     fetchHistorial();
   }, []);
 
@@ -76,55 +77,90 @@ function HistorialRutas() {
           <button className="btn" onClick={fetchHistorial}>Filtrar</button>
         </div>
 
-        {/* Mostrar Rutas */}
+        {/* Rutas Agregadas */}
         <div className="historial-section">
           <h3>Rutas Agregadas:</h3>
           {rutas.length > 0 ? (
-            <ul>
-              {rutas.map((ruta, index) => (
-                <li key={index}>
-                  {`Ruta ${ruta.numero_ruta}: ${ruta.origen} - ${ruta.destino}, Precio: ${ruta.precio}`}
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul>
+                {paginar(rutas, paginaRutas).map((ruta, index) => (
+                  <li key={index}>
+                    {`Ruta ${ruta.numero_ruta}: ${ruta.origen} - ${ruta.destino}, Precio: ${ruta.precio}`}
+                  </li>
+                ))}
+              </ul>
+              <div className="pagination">
+                <button onClick={() => setPaginaRutas(paginaRutas - 1)} disabled={paginaRutas === 1}>Anterior</button>
+                <span>Página {paginaRutas}</span>
+                <button
+                  onClick={() => setPaginaRutas(paginaRutas + 1)}
+                  disabled={paginaRutas * elementosPorPagina >= rutas.length}
+                >
+                  Siguiente
+                </button>
+              </div>
+            </>
           ) : (
             <p>No hay rutas agregadas.</p>
           )}
         </div>
 
-        {/* Mostrar Asignaciones */}
+        {/* Asignaciones */}
         <div className="historial-section">
           <h3>Asignaciones de Rutas:</h3>
           {asignaciones.length > 0 ? (
-            <ul>
-              {asignaciones.map((asignacion, index) => (
-                <li key={index}>
-                  {`Ruta ${asignacion.numero_ruta}, Conductor: ${asignacion.conductor}`}
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul>
+                {paginar(asignaciones, paginaAsignaciones).map((asignacion, index) => (
+                  <li key={index}>
+                    {`Ruta ${asignacion.numero_ruta}, Conductor: ${asignacion.conductor}`}
+                  </li>
+                ))}
+              </ul>
+              <div className="pagination">
+                <button onClick={() => setPaginaAsignaciones(paginaAsignaciones - 1)} disabled={paginaAsignaciones === 1}>Anterior</button>
+                <span>Página {paginaAsignaciones}</span>
+                <button
+                  onClick={() => setPaginaAsignaciones(paginaAsignaciones + 1)}
+                  disabled={paginaAsignaciones * elementosPorPagina >= asignaciones.length}
+                >
+                  Siguiente
+                </button>
+              </div>
+            </>
           ) : (
             <p>No hay asignaciones registradas.</p>
           )}
         </div>
 
-        {/* Mostrar Horarios */}
+        {/* Horarios */}
         <div className="historial-section">
           <h3>Horarios Asignados:</h3>
           {horarios.length > 0 ? (
-            <ul>
-              {horarios.map((horario, index) => (
-                <li key={index}>
-                  {`${horario.ruta}, ${horario.bus}, Día: ${diasMap[horario.dia]}, ${horario.hora_salida} - ${horario.hora_llegada}`}
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul>
+                {paginar(horarios, paginaHorarios).map((horario, index) => (
+                  <li key={index}>
+                    {`${horario.ruta}, ${horario.bus}, Día: ${diasMap[horario.dia]}, ${horario.hora_salida} - ${horario.hora_llegada}`}
+                  </li>
+                ))}
+              </ul>
+              <div className="pagination">
+                <button onClick={() => setPaginaHorarios(paginaHorarios - 1)} disabled={paginaHorarios === 1}>Anterior</button>
+                <span>Página {paginaHorarios}</span>
+                <button
+                  onClick={() => setPaginaHorarios(paginaHorarios + 1)}
+                  disabled={paginaHorarios * elementosPorPagina >= horarios.length}
+                >
+                  Siguiente
+                </button>
+              </div>
+            </>
           ) : (
             <p>No hay horarios asignados.</p>
           )}
         </div>
 
-        {/* Botón para regresar */}
         <button className="btn back-btn" onClick={() => navigate("/rutas")}>
           Regresar
         </button>

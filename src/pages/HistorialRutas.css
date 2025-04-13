@@ -1,103 +1,24 @@
-/* Fondo elegante con degradado oscuro */
-.historial-container {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(to right, #1e3c72, #2a5298); /* Azul oscuro degradado */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    padding: 20px;
-  }
-  
-  /* Caja del historial */
-  .historial-box {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    width: 500px;
-  }
-  
-  /* Título */
-  .historial-title {
-    font-size: 2rem;
-    color: #FFD700; /* Dorado */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    margin-bottom: 15px;
-  }
-  
-  /* Descripción */
-  .historial-description {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  /* Secciones del historial */
-  .historial-section {
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-  }
-  
-  /* Listas */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  /* Botón */
-  .btn {
-    width: 100%;
-    padding: 12px;
-    background: #4facfe; /* Azul celeste */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .btn:hover {
-    background: #00c6fb;
-    transform: scale(1.05);
-  }
-  
-  /* Botón de regresar */
-  .back-btn {
-    background: #ff6b6b;
-    margin-top: 10px;
-  }
-  
-  .back-btn:hover {
-    background: #ff4f4f;
-  }
-  
+.pagination {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 10px;
+}
 
-  .historial-filtros {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .historial-filtros input[type="date"] {
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-    background-color: #f0f0f0;
-  }
+.pagination button {
+  padding: 6px 12px;
+  background-color: #0053ba;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.historial-section {
+  margin-bottom: 20px;
+}
