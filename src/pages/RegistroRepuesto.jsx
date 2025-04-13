@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import "./RegistroRepuesto.css"; // Importamos el CSS
+import "./RegistroRepuesto.css";
 import { useState } from "react";
-import {apiClient, getCookie} from "../shared/services/apiClient";
+import { apiClient } from "../shared/services/apiClient";
+import { toast } from "react-toastify";
 
 function RegistroRepuesto() {
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
-    repuesto_id: "", //esto es opcional
-    factura_codigo: "", // Ahora es editable
+    repuesto_id: "", // Esto es opcional
+    factura_codigo: "",
     nombre: "",
     cantidad: "",
     descripcion: "",
@@ -20,19 +21,32 @@ function RegistroRepuesto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //{withCredentials: true}
-    
+
     try {
-      const token = getCookie("jwt");
-      await apiClient.post("/inventario/registrar-repuesto/", formData );
-      console.log("Nuevo Repuesto Registrado:", formData);
-      navigate("/existencia-repuestos");
+      await apiClient.post("/inventario/registrar-repuesto/", formData);
+      toast("Nuevo Repuesto Registrado");
+
+      // Preguntar al usuario si desea continuar o salir
+      const continuar = window.confirm("¿Desea continuar registrando repuestos? (Cancelar para salir del módulo)");
+
+      if (continuar) {
+        // Limpiar el formulario para nuevo registro
+        setFormData({
+          repuesto_id: "",
+          factura_codigo: "",
+          nombre: "",
+          cantidad: "",
+          descripcion: "",
+        });
+      } else {
+        // Salir del módulo
+        navigate("/repuestos");
+      }
+
     } catch (error) {
       console.error("Error al registrar el repuesto:", error);
-      alert("Error al registrar el repuesto. Por favor, inténtelo de nuevo."); //TODO: mejorar las alertas
-      
+      alert("Error al registrar el repuesto. Por favor, inténtelo de nuevo.");
     }
-    
   };
 
   return (
@@ -41,15 +55,48 @@ function RegistroRepuesto() {
       <p>Ingresa los datos del nuevo repuesto.</p>
 
       <form className="registro-form" onSubmit={handleSubmit}>
-        <input type="number" name="repuesto_id" placeholder="ID del Repuesto" value={formData.repuesto_id} onChange={handleChange} />
+        <input
+          type="number"
+          name="repuesto_id"
+          placeholder="ID del Repuesto"
+          value={formData.repuesto_id}
+          onChange={handleChange}
+        />
 
-        <input type="text" name="factura_codigo" placeholder="Código de Factura" required value={formData.factura_codigo} onChange={handleChange} />
+        <input
+          type="text"
+          name="factura_codigo"
+          placeholder="Código de Factura"
+          required
+          value={formData.factura_codigo}
+          onChange={handleChange}
+        />
 
-        <input type="text" name="nombre" placeholder="Nombre del repuesto" required value={formData.nombre} onChange={handleChange} />
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre del repuesto"
+          required
+          value={formData.nombre}
+          onChange={handleChange}
+        />
 
-        <input type="number" name="cantidad" placeholder="Cantidad" required value={formData.cantidad} onChange={handleChange} />
+        <input
+          type="number"
+          name="cantidad"
+          placeholder="Cantidad"
+          required
+          value={formData.cantidad}
+          onChange={handleChange}
+        />
 
-        <textarea name="descripcion" placeholder="Descripción del repuesto" required value={formData.descripcion} onChange={handleChange}></textarea>
+        <textarea
+          name="descripcion"
+          placeholder="Descripción del repuesto"
+          required
+          value={formData.descripcion}
+          onChange={handleChange}
+        ></textarea>
 
         <button type="submit" className="registro-button">
           Registrar Repuesto

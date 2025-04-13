@@ -1,24 +1,22 @@
-.pagination {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.pagination button {
-  padding: 6px 12px;
-  background-color: #0053ba;
+.btn {
+  background-color: #1d4ed8; /* Azul */
   color: white;
   border: none;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
 }
 
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.btn:hover {
+  background-color: #2563eb; /* Azul más claro al pasar el mouse */
 }
 
-.historial-section {
-  margin-bottom: 20px;
+.back-btn {
+  background-color: #6b7280; /* Gris */
+}
+
+.back-btn:hover {
+  background-color: #4b5563;
 }

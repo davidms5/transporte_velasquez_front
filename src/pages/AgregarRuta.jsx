@@ -24,30 +24,22 @@ function AgregarRuta() {
     e.preventDefault();
 
     try {
-      const response = await apiClient.post(
-        "/rutas-buses/rutas/crear/", // Asegúrate de usar tu endpoint real
-        rutaData
-      );
+      await apiClient.post("/rutas-buses/rutas/crear/", rutaData);
 
       alert("Ruta agregada correctamente.");
-      setRutaData({ origen: "", destino: "", numero_ruta: "", precio: "" });
+
+      // Limpiar el formulario después de agregar
+      setRutaData({
+        origen: "",
+        destino: "",
+        numero_ruta: "",
+        precio: "",
+      });
+
     } catch (error) {
       console.error("Error al agregar la ruta:", error);
       alert("Error al agregar la ruta. Verifica los datos.");
     }
-    //alert(`Ruta Agregada: 
-    //Salida: ${rutaData.salida}, 
-    //Llegada: ${rutaData.llegada}, 
-    //Número de Ruta: ${rutaData.numeroRuta},
-    //Precio: ${rutaData.precio}`);
-//
-    //// Guardar la ruta en localStorage
-    //const rutasGuardadas = JSON.parse(localStorage.getItem("rutas")) || [];
-    //rutasGuardadas.push(rutaData);
-    //localStorage.setItem("rutas", JSON.stringify(rutasGuardadas));
-//
-    //// Limpiar formulario
-    //setRutaData({ salida: "", llegada: "", numeroRuta: "", precio: "" });
   };
 
   return (
@@ -78,7 +70,7 @@ function AgregarRuta() {
 
           <label>Número de Ruta:</label>
           <input
-            type="number"
+            type="text"
             name="numero_ruta"
             value={rutaData.numero_ruta}
             onChange={handleChange}

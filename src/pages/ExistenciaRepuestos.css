@@ -1,92 +1,33 @@
-/* Hace que la página ocupe toda la pantalla */
-.existencia-page {
-    width: 100vw;
-    height: 100vh; /* 100% del alto de la pantalla */
-    background: linear-gradient(to right, #0F2027, #203A43, #2C5364); /* Azul oscuro → Gris elegante */
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Título del módulo */
-  .title {
-    font-size: 2.5rem;
-    color: #FFD700; /* Dorado */
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-    margin-bottom: 20px;
-  }
-  
-  /* Descripción */
-  .existencia-page p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #E0E0E0; /* Blanco grisáceo */
-  }
-  
-  /* Contenedor de la tabla */
-  .table-container {
-    background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 700px;
-    width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Estilo de la tabla */
-  .repuestos-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  /* Encabezados de la tabla */
-  .repuestos-table th {
-    background-color: #FFD700; /* Dorado */
-    color: black;
-    padding: 12px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-  }
-  
-  /* Celdas de la tabla */
-  .repuestos-table td {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-  
-  /* Filas alternas para mejorar legibilidad */
-  .repuestos-table tr:nth-child(even) td {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Efecto al pasar el mouse sobre las filas */
-  .repuestos-table tr:hover td {
-    background-color: rgba(255, 255, 255, 0.4);
-    transition: background 0.3s;
-  }
-  
-  /* Botón de regresar */
-  .back-button {
-    background-color: #FF4500; /* Rojo/Naranja */
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s ease-in-out, transform 0.2s;
-  }
-  
-  .back-button:hover {
-    background-color: #E63E00;
-    transform: scale(1.05);
-  }
-  
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #2563eb;
+}
+
+.back-button {
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #4b5563;
+}
