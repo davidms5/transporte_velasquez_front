@@ -6,7 +6,7 @@ function Reportes() {
 
   return (
     <div className="reportes-page">
-      <h2 className="title">Reportes de Entrada y Salida</h2>
+      <h2 className="title">  Historial Entrada y Salida Repuesto</h2>
       <p>Aquí puedes ver los reportes de entradas y salidas de repuestos.</p>
 
       {/* Botón para ir al Historial */}

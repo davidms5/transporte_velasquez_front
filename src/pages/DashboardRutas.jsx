@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
 import "../styles/styles.css";
-
+import { useNavigate } from "react-router-dom";
 const DashboardRutas = () => {
   const viajesPorRutaRef = useRef(null);
   const precioPorRutaRef = useRef(null);
@@ -10,7 +10,7 @@ const DashboardRutas = () => {
   const viajesPorRutaChart = useRef(null);
   const precioPorRutaChart = useRef(null);
   const topRutasHorariosChart = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const rutas = ["ST-001", "ST-002", "ST-003", "ST-004", "ST-005", "ST-006", "ST-007", "ST-009", "ST-010"];
     const viajes = [20, 15, 25, 10, 30, 12, 18, 22, 16];
@@ -172,12 +172,11 @@ const DashboardRutas = () => {
       </div>
 
       <div className="flex justify-center mt-8">
-        <a
-          href="/estadistica"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"
-        >
-          Regresar
-        </a>
+        
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"
+         onClick={() => navigate("/estadistica")}>
+          regresar
+        </button>
       </div>
     </div>
   );

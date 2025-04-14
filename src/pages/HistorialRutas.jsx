@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HistorialRutas.css";
 import { apiClient } from "../shared/services/apiClient";
+import * as XLSX from "xlsx";
 
 function HistorialRutas() {
   const navigate = useNavigate();
@@ -12,11 +13,20 @@ function HistorialRutas() {
   const [desde, setDesde] = useState("");
   const [hasta, setHasta] = useState("");
 
-  // Estados de paginación
   const [paginaRutas, setPaginaRutas] = useState(1);
   const [paginaAsignaciones, setPaginaAsignaciones] = useState(1);
   const [paginaHorarios, setPaginaHorarios] = useState(1);
   const elementosPorPagina = 5;
+
+  const diasMap = {
+    LUN: "Lunes",
+    MAR: "Martes",
+    MIE: "Miércoles",
+    JUE: "Jueves",
+    VIE: "Viernes",
+    SAB: "Sábado",
+    DOM: "Domingo"
+  };
 
   const fetchHistorial = async () => {
     let url = "/rutas-buses/historial/rutas/";
@@ -32,8 +42,6 @@ function HistorialRutas() {
       setRutas(data.rutas_agregadas || []);
       setAsignaciones(data.asignaciones_rutas || []);
       setHorarios(data.horarios_asignados || []);
-
-      // Reiniciar páginas al filtrar
       setPaginaRutas(1);
       setPaginaAsignaciones(1);
       setPaginaHorarios(1);
@@ -42,19 +50,42 @@ function HistorialRutas() {
     }
   };
 
-  const diasMap = {
-    LUN: "Lunes",
-    MAR: "Martes",
-    MIE: "Miércoles",
-    JUE: "Jueves",
-    VIE: "Viernes",
-    SAB: "Sábado",
-    DOM: "Domingo"
-  };
-
   const paginar = (datos, pagina) => {
     const inicio = (pagina - 1) * elementosPorPagina;
     return datos.slice(inicio, inicio + elementosPorPagina);
+  };
+
+  const generarReporteExcel = () => {
+    const wb = XLSX.utils.book_new();
+
+    const hojaRutas = rutas.map(ruta => ({
+      "Número de Ruta": ruta.numero_ruta,
+      "Origen": ruta.origen,
+      "Destino": ruta.destino,
+      "Precio": ruta.precio
+    }));
+    const wsRutas = XLSX.utils.json_to_sheet(hojaRutas);
+    XLSX.utils.book_append_sheet(wb, wsRutas, "Rutas Agregadas");
+
+    const hojaAsignaciones = asignaciones.map(asig => ({
+      "Número de Ruta": asig.numero_ruta,
+      "Conductor": asig.conductor
+    }));
+    const wsAsignaciones = XLSX.utils.json_to_sheet(hojaAsignaciones);
+    XLSX.utils.book_append_sheet(wb, wsAsignaciones, "Asignaciones");
+
+    const hojaHorarios = horarios.map(horario => ({
+      "Ruta": horario.ruta,
+      "Bus": horario.bus,
+      "Día": diasMap[horario.dia],
+      "Hora de Salida": horario.hora_salida,
+      "Hora de Llegada": horario.hora_llegada
+    }));
+    const wsHorarios = XLSX.utils.json_to_sheet(hojaHorarios);
+    XLSX.utils.book_append_sheet(wb, wsHorarios, "Horarios");
+
+    const fecha = new Date().toLocaleDateString("es-PE").replace(/\//g, "-");
+    XLSX.writeFile(wb, `Historial_Rutas_${fecha}.xlsx`);
   };
 
   useEffect(() => {
@@ -92,12 +123,7 @@ function HistorialRutas() {
               <div className="pagination">
                 <button onClick={() => setPaginaRutas(paginaRutas - 1)} disabled={paginaRutas === 1}>Anterior</button>
                 <span>Página {paginaRutas}</span>
-                <button
-                  onClick={() => setPaginaRutas(paginaRutas + 1)}
-                  disabled={paginaRutas * elementosPorPagina >= rutas.length}
-                >
-                  Siguiente
-                </button>
+                <button onClick={() => setPaginaRutas(paginaRutas + 1)} disabled={paginaRutas * elementosPorPagina >= rutas.length}>Siguiente</button>
               </div>
             </>
           ) : (
@@ -120,12 +146,7 @@ function HistorialRutas() {
               <div className="pagination">
                 <button onClick={() => setPaginaAsignaciones(paginaAsignaciones - 1)} disabled={paginaAsignaciones === 1}>Anterior</button>
                 <span>Página {paginaAsignaciones}</span>
-                <button
-                  onClick={() => setPaginaAsignaciones(paginaAsignaciones + 1)}
-                  disabled={paginaAsignaciones * elementosPorPagina >= asignaciones.length}
-                >
-                  Siguiente
-                </button>
+                <button onClick={() => setPaginaAsignaciones(paginaAsignaciones + 1)} disabled={paginaAsignaciones * elementosPorPagina >= asignaciones.length}>Siguiente</button>
               </div>
             </>
           ) : (
@@ -148,12 +169,7 @@ function HistorialRutas() {
               <div className="pagination">
                 <button onClick={() => setPaginaHorarios(paginaHorarios - 1)} disabled={paginaHorarios === 1}>Anterior</button>
                 <span>Página {paginaHorarios}</span>
-                <button
-                  onClick={() => setPaginaHorarios(paginaHorarios + 1)}
-                  disabled={paginaHorarios * elementosPorPagina >= horarios.length}
-                >
-                  Siguiente
-                </button>
+                <button onClick={() => setPaginaHorarios(paginaHorarios + 1)} disabled={paginaHorarios * elementosPorPagina >= horarios.length}>Siguiente</button>
               </div>
             </>
           ) : (
@@ -161,9 +177,11 @@ function HistorialRutas() {
           )}
         </div>
 
-        <button className="btn back-btn" onClick={() => navigate("/rutas")}>
-          Regresar
-        </button>
+        {/* Botones de acción */}
+        <div style={{ marginTop: "20px" }}>
+          <button className="btn" onClick={generarReporteExcel}>Generar Reporte Excel</button>
+          <button className="btn back-btn" onClick={() => navigate("/rutas")}>Regresar</button>
+        </div>
       </div>
     </div>
   );

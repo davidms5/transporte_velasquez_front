@@ -31,7 +31,9 @@ function Repuestos() {
           Dar de Baja
         </button>
 
-        <button className="back-button" onClick={() => navigate("/inicio")}>
+        <button className="back-button" 
+        style={{backgroundColor: "#FF4500"}}
+        onClick={() => navigate("/inicio")}>
           Regresar
         </button>
       </div>

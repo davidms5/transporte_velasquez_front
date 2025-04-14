@@ -1,107 +1,12 @@
-.facturacion-page {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(to right, #2C3E50, #4CA1AF);
-    color: white;
-    padding: 40px;
-    text-align: center;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    color: #FFD700;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  }
-  
-  .facturacion-form input {
-    padding: 10px;
-    margin: 5px;
-    width: 250px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .add-button {
-    background-color: #1E90FF;
-    padding: 10px 15px;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 5px;
-  }
-  
-  .add-button:hover {
-    background-color: #0073E6;
-  }
-  
-  .facturacion-table table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .facturacion-table th {
-    background-color: #FFD700;
-    color: black;
-    padding: 10px;
-  }
-  
-  .facturacion-table td {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .edit-button {
-    background-color: #FF4500;
-    padding: 5px 10px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
-  
-  .edit-button:hover {
-    background-color: #E63E00;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 400px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  }
-  
-  .modal-content input {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-  }
-  
-  .modal-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .save-button, .cancel-button {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-  }
-  
+.back-button {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+}
