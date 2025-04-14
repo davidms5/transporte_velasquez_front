@@ -39,7 +39,7 @@ function Inicio() {
         Módulo de Estadística
       </button>
 
-      {/* ✅ Nuevo Botón para el módulo de Usuarios */}
+      {/* ✅ Nuevo Botón para el módulo de Usuarios TODO: que rediriga al panel de admin, si su rol es admin*/}
       <button className="module-button" onClick={() => navigate("/usuarios")}>
         Módulo de Usuarios
       </button>

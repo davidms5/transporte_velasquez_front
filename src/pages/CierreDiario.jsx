@@ -34,6 +34,7 @@ function CierreDiario() {
       });
 
       setResumen(response.data);
+      navigate("/reporte-cierre-diario");
     } catch (error) {
       console.error("Error al generar el cierre:", error);
       alert("Hubo un error al generar el cierre del día.");
