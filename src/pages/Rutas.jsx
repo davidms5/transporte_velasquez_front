@@ -25,7 +25,9 @@ function Rutas() {
         <button className="rutas-button" onClick={() => navigate("/historial-rutas")}>
           Historial de Rutas
         </button>
-        <button className="back-button" onClick={() => navigate("/inicio")}>
+        <button className="back-button"
+        style={{backgroundColor: "#ffcc00"}}
+         onClick={() => navigate("/inicio")}>
           Regresar
         </button>
       </div>

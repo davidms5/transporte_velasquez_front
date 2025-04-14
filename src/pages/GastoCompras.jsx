@@ -1,28 +1,51 @@
 import React, { useState } from "react";
 import "./GastoCompras.css";
+import { toast } from "react-toastify";
+import { apiClient } from "../shared/services/apiClient";
 
 function GastoCompras() {
   const [factura, setFactura] = useState("");
   const [proveedor, setProveedor] = useState("");
   const [cantidad, setCantidad] = useState("");
 
-  const handleAgregar = () => {
+  const handleAgregar = async () => {
     if (!factura || !proveedor || !cantidad) {
-      alert("Por favor complete todos los campos.");
+      toast("Por favor complete todos los campos.");
       return;
     }
 
     // Simulación de envío de datos
-    console.log("Registro de Gasto de Compras:", {
-      factura,
-      proveedor,
-      cantidad,
-    });
+    //console.log("Registro de Gasto de Compras:", {
+    //  factura,
+    //  proveedor,
+    //  cantidad,
+    //});
+    try {
+      
+      const response = await apiClient.post("ventas/gastos/combustible-registrar/", {
+        numero_factura: factura,
+        proveedor: proveedor,
+        cantidad: parseFloat(cantidad),
+      });
 
+      const data = response.data;
+
+      toast.success(`✅ Combustible registrado. UUID: ${data.uuid_combustible}`);
+      console.log("Respuesta de Django:", data);
+
+      setFactura("");
+      setProveedor("");
+      setCantidad("");
+    } catch (error) {
+      console.error("Error al registrar combustible:", error);
+      if (error.response?.data?.numero_factura?.[0] === "Combustible with this Numero factura already exists.") {
+        toast.error("❌ Ya existe un registro con ese número de factura.");
+      } else {
+        toast.error("❌ Ocurrió un error al registrar el gasto.");
+      }
+    }
     // Limpiar campos
-    setFactura("");
-    setProveedor("");
-    setCantidad("");
+
   };
 
   return (

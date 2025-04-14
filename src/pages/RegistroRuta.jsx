@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegistroRuta.css"; // Importamos el CSS
 import { apiClient } from "../shared/services/apiClient";
+import { toast } from "react-toastify";
 
 function RegistroRuta() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function RegistroRuta() {
         registroData
       );
   
-      alert("Registro exitoso: " + response.data.message);
+      toast("Registro exitoso: " + response.data.message);
       setRegistroData({
         conductor: {
           nombre: "",

@@ -39,9 +39,9 @@ function Inicio() {
         Módulo de Estadística
       </button>
 
-      {/* ✅ Nuevo Botón para el módulo de Usuarios */}
-      <button className="module-button" onClick={() => navigate("/usuarios")}>
-        Módulo de Usuarios
+      {/* ✅ Nuevo Botón para el módulo de Usuarios TODO: que solo lo pueda ver alguien con rol admin o similar*/}
+      <button className="module-button" onClick={() => { window.open(import.meta.env.VITE_ADMIN, "_blank")}}>
+        Módulo de Usuarios y admin
       </button>
 
       <button className="module-button" onClick={logout}>

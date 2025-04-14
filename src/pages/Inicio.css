@@ -1,7 +1,7 @@
 /* Hace que la página ocupe toda la pantalla */
 .inicio-page {
-  width: 100vw;
-  height: 100vh; /* 100% del alto de la pantalla */
+  max-width: 100%;
+  height: 100%; /* 100% del alto de la pantalla */
   background: linear-gradient(to right, #2C3E50, #BDC3C7); /* Azul oscuro → Gris */
   color: white;
   padding: 40px 20px;
@@ -38,6 +38,7 @@
   border-radius: 8px;
   cursor: pointer;
   margin: 10px;
+  max-width: 60%;
   transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
