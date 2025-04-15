@@ -1,7 +1,7 @@
 /* Hace que la página ocupe toda la pantalla */
 .repuestos-page {
     width: 100%;
-    height: 100%; /* 100% del alto de la pantalla */
+    min-height: 100vh; /* 100% del alto de la pantalla */
     background: linear-gradient(to right, #1E3A5F, #A8B5C3); /* Azul oscuro → Gris azulado */
     color: white;
     padding-bottom: 70px;

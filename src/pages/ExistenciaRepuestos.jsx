@@ -11,12 +11,8 @@ function ExistenciaRepuestos() {
   useEffect(() => {
     const fetchRepuestos = async () => {
       try {
-        const token = sessionStorage.getItem("jwt_token");
-        const response = await apiClient.get("/inventario/get-repuestos/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+
+        const response = await apiClient.get("/inventario/get-repuestos/");
 
         setRepuestos(response.data.results);
       } catch (error) {

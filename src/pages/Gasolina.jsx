@@ -1,28 +1,44 @@
 import React, { useState } from "react";
 import "./Gasolina.css";
+import { toast } from "react-toastify";
+import { apiClient } from "../shared/services/apiClient";
 
 function Gasolina() {
   const [factura, setFactura] = useState("");
   const [monto, setMonto] = useState("");
   const [bus, setBus] = useState("");
 
-  const handleAgregar = () => {
+  const handleAgregar = async () => {
     if (!factura || !monto || !bus) {
-      alert("Por favor complete todos los campos.");
+      toast.error("Por favor complete todos los campos.");
       return;
     }
 
-    // Simulación de envío de datos
-    console.log("Registro de gasolina:", {
-      factura,
-      monto,
-      bus,
-    });
+    try {
+      
+      const response = await apiClient.post("ventas/gastos/combustible/actualizar/", {
+        numero_factura: factura,
+        precio_combustible: parseFloat(monto),
+        numero_bus: bus,
+      })
 
-    // Limpiar campos
-    setFactura("");
-    setMonto("");
-    setBus("");
+      toast.success(response.data.mensaje || "Gasolina actualizada correctamente ✅");
+      console.log("Respuesta:", response.data);
+      // Limpiar campos
+      setFactura("");
+      setMonto("");
+      setBus("");
+
+    } catch (error) {
+      if (error.response?.data?.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("Error inesperado al actualizar.");
+      }
+      console.error("Error:", error);
+    }
+
+
   };
 
   return (
