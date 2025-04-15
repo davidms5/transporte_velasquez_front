@@ -30,9 +30,14 @@ function Ventas() {
           Cierre Diario
         </button>
 
-        {/* ✅ Nuevo submódulo: Resumen por Ruta */}
+        {/* Submódulo: Resumen por Ruta */}
         <button className="module-button" onClick={() => navigate("/resumen-por-ruta")}>
           Resumen por Ruta
+        </button>
+
+        {/* ✅ Nuevo submódulo: Reporte de Cierre Diario */}
+        <button className="module-button" onClick={() => navigate("/reporte-cierre-diario")}>
+          Reporte de Cierre Diario
         </button>
 
         {/* Botón para regresar */}

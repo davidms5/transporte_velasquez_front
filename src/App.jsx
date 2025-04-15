@@ -29,6 +29,7 @@ import HistorialGastoCompras from "./pages/HistorialGastoCompras";
 import Estadistica from "./pages/Estadistica"; // ✅ Nuevo módulo de Estadística
 import DashboardGastos from "./pages/DashboardGastos"; // ✅ Dashboard de Gastos
 import DashboardRutas from "./pages/DashboardRutas"; // ✅ Dashboard de Rutas
+import ReporteCierreDiario from "./pages/ReporteCierreDiario";
 import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -71,6 +72,7 @@ function App() {
                 <Route path="/estadistica" element={<Estadistica />} /> {/* ✅ Ruta Estadística */}
                 <Route path="/dashboard-gastos" element={<DashboardGastos />} /> {/* ✅ Ruta Dashboard de Gastos */}
                 <Route path="/dashboard-rutas" element={<DashboardRutas />} /> {/* ✅ Ruta Dashboard de Rutas */}
+                <Route path="/reporte-cierre-diario" element={<ReporteCierreDiario />} /> {/* ✅ Ruta Reporte De Cierre Diario */}
               </Routes>
             </RequireAuth>
           }
