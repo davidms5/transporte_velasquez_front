@@ -73,6 +73,7 @@ function App() {
                 <Route path="/dashboard-gastos" element={<DashboardGastos />} /> {/* ✅ Ruta Dashboard de Gastos */}
                 <Route path="/dashboard-rutas" element={<DashboardRutas />} /> {/* ✅ Ruta Dashboard de Rutas */}
                 <Route path="/reporte-cierre-diario" element={<ReporteCierreDiario />} /> {/* ✅ Ruta Reporte De Cierre Diario */}
+                <Route path="/unauthorized" element={<h2>No tenés permisos para ver esta página ❌</h2>}/>
               </Routes>
             </RequireAuth>
           }
