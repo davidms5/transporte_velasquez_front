@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import "./Ventas.css"; // Importamos los estilos CSS
+import { ROLES } from "../shared/constants/roles";
+import { getUserRole } from "../shared/services/auth";
 
 function Ventas() {
   const navigate = useNavigate();
+  const role = getUserRole();
 
   return (
     <div className="ventas-container">
@@ -26,9 +29,10 @@ function Ventas() {
         </button>
 
         {/* Submódulo: Cierre Diario */}
-        <button className="module-button" onClick={() => navigate("/cierre-diario")}>
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+        (<button className="module-button" onClick={() => navigate("/cierre-diario")}>
           Cierre Diario
-        </button>
+        </button>)}
 
         {/* Submódulo: Resumen por Ruta */}
         <button className="module-button" onClick={() => navigate("/resumen-por-ruta")}>
@@ -36,9 +40,10 @@ function Ventas() {
         </button>
 
         {/* ✅ Nuevo submódulo: Reporte de Cierre Diario */}
-        <button className="module-button" onClick={() => navigate("/reporte-cierre-diario")}>
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+        (<button className="module-button" onClick={() => navigate("/reporte-cierre-diario")}>
           Reporte de Cierre Diario
-        </button>
+        </button>)}
 
         {/* Botón para regresar */}
         <button className="btn back-btn" onClick={() => navigate("/inicio")}>

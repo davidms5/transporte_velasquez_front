@@ -1,9 +1,9 @@
 // auth.js
 export function getUserRole() {
-    return sessionStorage.getItem("rol"); // puede devolver 'admin', 'facturacion', etc.
+    return sessionStorage.getItem("role"); // puede devolver 'admin', 'facturacion', etc.
   }
   
   export function isAuthenticated() {
-    return !!sessionStorage.getItem("token");
+    return !!sessionStorage.getItem("jwt_token");
   }
   

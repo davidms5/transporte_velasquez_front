@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import "./Repuestos.css"; // Importamos el CSS
+import { ROLES } from "../shared/constants/roles";
+import { getUserRole } from "../shared/services/auth";
 
 function Repuestos() {
   const navigate = useNavigate();
-
+ const roles = getUserRole();
   return (
     <div className="repuestos-page">
       <h2 className="title">Módulo de Repuestos</h2>
@@ -11,25 +13,31 @@ function Repuestos() {
 
       {/* Botones de navegación */}
       <div className="buttons-container">
-        <button className="module-button" onClick={() => navigate("/registro-repuesto")}>
+
+        {[ROLES.ADMIN, ROLES.OPERADOR].includes(roles) &&
+        (<button className="module-button" onClick={() => navigate("/registro-repuesto")}>
           Registro de Repuesto
-        </button>
+        </button>)}
 
-        <button className="module-button" onClick={() => navigate("/reportes")}>
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
+        (<button className="module-button" onClick={() => navigate("/reportes")}>
           Reportes de Entrada y Salida
-        </button>
+        </button>)}
 
-        <button className="module-button" onClick={() => navigate("/existencia-repuestos")}>
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
+        (<button className="module-button" onClick={() => navigate("/existencia-repuestos")}>
           Existencia de Repuestos
-        </button>
+        </button>)}
 
-        <button className="module-button" onClick={() => navigate("/facturacion")}>
+        {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.FACTURACION].includes(roles) &&
+        (<button className="module-button" onClick={() => navigate("/facturacion")}>
           Facturación
-        </button>
+        </button>)}
 
-        <button className="module-button" onClick={() => navigate("/dar-de-baja")}>
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
+        (<button className="module-button" onClick={() => navigate("/dar-de-baja")}>
           Dar de Baja
-        </button>
+        </button>)}
 
         <button className="back-button" 
         style={{backgroundColor: "#FF4500"}}
