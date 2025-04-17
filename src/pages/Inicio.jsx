@@ -27,9 +27,10 @@ function Inicio() {
       </button>
 
       {/* Botón para ir al módulo de Ventas */}
-      <button className="module-button" onClick={() => navigate("/ventas")}>
+      {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+        <button className="module-button" onClick={() => navigate("/ventas")}>
         Módulo de Ventas
-      </button>
+      </button>}
 
       {/* ✅ Botón para el módulo de Gastos */}
       {[ROLES.ADMIN, ROLES.OPERADOR].includes(role) &&
@@ -44,9 +45,10 @@ function Inicio() {
       </button>)}
 
       {/* ✅ Nuevo Botón para el módulo de Usuarios TODO: que solo lo pueda ver alguien con rol admin o similar*/}
-      <button className="module-button" onClick={() => { window.open(import.meta.env.VITE_ADMIN, "_blank")}}>
+      {[ROLES.ADMIN].includes(role) &&
+        <button className="module-button" onClick={() => { window.open(import.meta.env.VITE_ADMIN, "_blank")}}>
         Módulo de Usuarios y admin
-      </button>
+      </button>}
 
       <button className="module-button" onClick={logout}>
         log out
