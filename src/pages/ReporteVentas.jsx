@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { apiClient } from "../shared/services/apiClient";
 import { toast } from "react-toastify";
 import "./ReporteVentas.css";
+import * as XLSX from "xlsx"; // Importar la librería XLSX para generar archivos Excel
 
 function ReporteVentas() {
   const navigate = useNavigate();
@@ -10,7 +11,6 @@ function ReporteVentas() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const fetchFacturas = async () => {
       try {
         const response = await apiClient.get("/ventas/reporte-dia/");
@@ -25,15 +25,22 @@ function ReporteVentas() {
     };
 
     fetchFacturas();
-    //const facturasGuardadas = JSON.parse(localStorage.getItem("facturas")) || [];
-    //setFacturas(facturasGuardadas);
   }, []);
+
+  // Función para generar el reporte en Excel
+  const generateExcelReport = () => {
+    const ws = XLSX.utils.json_to_sheet(facturas);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Reporte de Ventas");
+
+    // Guardar el archivo Excel
+    XLSX.writeFile(wb, "reporte_ventas.xlsx");
+  };
 
   return (
     <div className="reporte-container">
       <div className="reporte-box">
         <h2 className="reporte-title">Reporte de Ventas</h2>
-
 
         {loading ? (
           <p>Cargando...</p>
@@ -51,8 +58,17 @@ function ReporteVentas() {
           <p>No hay ventas registradas para hoy.</p>
         )}
 
-        
-        <button className="btn back-btn" onClick={() => navigate("/ventas")}>Regresar</button>
+        {/* Botón para generar el reporte en Excel */}
+        <button
+          className="btn generate-excel-btn"
+          onClick={generateExcelReport}
+        >
+          Generar Reporte en Excel
+        </button>
+
+        <button className="btn back-btn" onClick={() => navigate("/ventas")}>
+          Regresar
+        </button>
       </div>
     </div>
   );

@@ -1,19 +1,38 @@
 .historial-gasto-compras-container {
-    padding: 2rem;
-    min-height: 100vh; 
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #141e30, #243b55);
-  }
-  
-  .historial-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .historial-table th,
-  .historial-table td {
-    padding: 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-  
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filtro-fecha {
+  margin-bottom: 20px;
+}
+
+.historial-gasto-compras-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.historial-gasto-compras-table th, 
+.historial-gasto-compras-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.generate-excel-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.generate-excel-btn:hover {
+  background-color: #45a049;
+}

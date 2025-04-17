@@ -1,0 +1,51 @@
+.dashboard-ventas {
+    padding: 2rem;
+    background-color: #1f1f2e;
+    color: #ffffff;
+    min-height: 100vh;
+  }
+  
+  .chart-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .chart-item {
+    background-color: #2a2a3b;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .chart-item h3 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  /* Botón de regresar */
+  .btn.back-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: #3f51b5;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn.back-btn:hover {
+    background-color: #303f9f;
+  }
+  
+  /* Forzar color blanco en números del gráfico con CSS (opcional, más confiable con JS) */
+  canvas {
+    background-color: transparent;
+  }
+  
+  /* Puedes agregar estilos adicionales para mejorar el aspecto general */
+  

@@ -29,6 +29,7 @@ import HistorialGastoCompras from "./pages/HistorialGastoCompras";
 import Estadistica from "./pages/Estadistica"; // ✅ Nuevo módulo de Estadística
 import DashboardGastos from "./pages/DashboardGastos"; // ✅ Dashboard de Gastos
 import DashboardRutas from "./pages/DashboardRutas"; // ✅ Dashboard de Rutas
+import DashboardVentas from "./pages/DashboardVentas";
 import ReporteCierreDiario from "./pages/ReporteCierreDiario";
 import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
