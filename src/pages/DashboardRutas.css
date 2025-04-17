@@ -1,45 +1,40 @@
-/* src/styles/styles.css */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
 
-/* Contenedor del gráfico */
-.chart-container {
-    position: relative;
-    width: 80%; /* Ajustamos el tamaño del gráfico */
-    height: 500px; /* Ajustamos el tamaño para que se vea mejor */
-    margin: 0 auto; /* Centramos el gráfico */
-    display: flex;
-    flex-direction: column; /* Coloca el gráfico y el botón en columna */
-    justify-content: space-between; /* Asegura que el gráfico y el botón estén bien distribuidos */
-    align-items: center; /* Centra el contenido */
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.chart-card {
+  width: 600px; /* Ajusta el tamaño según sea necesario */
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .chart-card {
+    width: 90%;
   }
-  
-  /* Estilo del botón de regresar */
-  button.regresar {
-    display: block;
-    width: 200px;
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 20px; /* Asegura que el botón esté alejado del gráfico */
+
+  .chart-title {
+    font-size: 1.2rem;
   }
-  
-  button.regresar:hover {
-    background-color: #0056b3;
-    transform: scale(1.05); /* Hace que el botón crezca ligeramente al pasar el ratón */
-  }
-  
-  button.regresar:active {
-    background-color: #004080;
-    transform: scale(1); /* El botón regresa a su tamaño original al hacer clic */
-  }
-  
-  button.regresar:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Agrega un efecto al foco */
-  }
-  
+}
