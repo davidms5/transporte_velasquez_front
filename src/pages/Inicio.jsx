@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import "./Inicio.css"; // Importamos el CSS
 import { useAuth } from "../context/authContext";
+import { getUserRole } from "../shared/services/auth";
+import { ROLES } from "../shared/constants/roles";
 
 function Inicio() {
   const navigate = useNavigate();
   const { logout } = useAuth();
-
+  const role = getUserRole();
   return (
     <div className="inicio-page">
       {/* Título principal arriba */}
@@ -30,14 +32,16 @@ function Inicio() {
       </button>
 
       {/* ✅ Botón para el módulo de Gastos */}
-      <button className="module-button" onClick={() => navigate("/gastos")}>
+      {[ROLES.ADMIN, ROLES.OPERADOR].includes(role) &&
+      (<button className="module-button" onClick={() => navigate("/gastos")}>
         Módulo de Gastos
-      </button>
+      </button>)}
 
       {/* ✅ Nuevo Botón para el módulo de Estadística */}
-      <button className="module-button" onClick={() => navigate("/estadistica")}>
+      {[ROLES.ADMIN, ROLES.FACTURACION].includes(role) && 
+      (<button className="module-button" onClick={() => navigate("/estadistica")}>
         Módulo de Estadística
-      </button>
+      </button>)}
 
       {/* ✅ Nuevo Botón para el módulo de Usuarios TODO: que solo lo pueda ver alguien con rol admin o similar*/}
       <button className="module-button" onClick={() => { window.open(import.meta.env.VITE_ADMIN, "_blank")}}>
