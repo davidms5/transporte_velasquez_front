@@ -2,6 +2,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { saveEncryptItem } from "../shared/services/secureStorage";
 
 const AuthContext = createContext();
 
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     sessionStorage.setItem("jwt_token", token);
-    sessionStorage.setItem("role", jwtDecode(token).role)
+    sessionStorage.setItem("role", jwtDecode(token).role) //sav
     setIsAuthenticated(true);
     navigate("/inicio");
   };
