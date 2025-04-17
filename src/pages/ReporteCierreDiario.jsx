@@ -5,7 +5,14 @@ import { apiClient } from "../shared/services/apiClient";
 import "./ReporteCierreDiario.css";
 
 function ReporteCierreDiario() {
-  const [fecha, setFecha] = useState(() => new Date().toISOString().split("T")[0]);
+  const [fecha, setFecha] = useState(() => {
+    return new Date().toLocaleDateString('es-HN', {
+      timeZone: 'America/Tegucigalpa',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).split('/').reverse().join('-');
+  });
   const [datosReporte, setDatosReporte] = useState(null);
 
   const generarReporte = async () => {
