@@ -19,12 +19,12 @@ function Repuestos() {
           Registro de Repuesto
         </button>)}
 
-        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
+        {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.OPERADOR].includes(roles) &&
         (<button className="module-button" onClick={() => navigate("/reportes")}>
           Reportes de Entrada y Salida
         </button>)}
 
-        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
+        {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.OPERADOR].includes(roles) &&
         (<button className="module-button" onClick={() => navigate("/existencia-repuestos")}>
           Existencia de Repuestos
         </button>)}

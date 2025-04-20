@@ -17,29 +17,31 @@ function Inicio() {
       <h2 className="subtitle">Seleccione el módulo que desea acceder</h2>
 
       {/* Botón para ir al módulo de Repuestos */}
-      <button className="module-button" onClick={() => navigate("/repuestos")}>
+      {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+      (<button className="module-button" onClick={() => navigate("/repuestos")}>
         Módulo de Repuestos
-      </button>
+      </button>)}
 
       {/* Botón para ir al módulo de Rutas */}
-      <button className="module-button" onClick={() => navigate("/rutas")}>
+      {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.OPERADOR].includes(role) &&
+      (<button className="module-button" onClick={() => navigate("/rutas")}>
         Módulo de Rutas
-      </button>
+      </button>)}
 
       {/* Botón para ir al módulo de Ventas */}
-      {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+      {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.FACTURACION].includes(role) &&
         <button className="module-button" onClick={() => navigate("/ventas")}>
         Módulo de Ventas
       </button>}
 
       {/* ✅ Botón para el módulo de Gastos */}
-      {[ROLES.ADMIN, ROLES.OPERADOR].includes(role) &&
+      {[ROLES.ADMIN, ROLES.OPERADOR, ROLES.FACTURACION].includes(role) &&
       (<button className="module-button" onClick={() => navigate("/gastos")}>
         Módulo de Gastos
       </button>)}
 
       {/* ✅ Nuevo Botón para el módulo de Estadística */}
-      {[ROLES.ADMIN, ROLES.FACTURACION].includes(role) && 
+      {[ROLES.ADMIN, ROLES.FACTURACION, ROLES.SUPERVISOR].includes(role) && 
       (<button className="module-button" onClick={() => navigate("/estadistica")}>
         Módulo de Estadística
       </button>)}

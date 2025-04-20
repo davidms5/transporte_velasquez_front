@@ -18,7 +18,7 @@ function VentasFactura() {
       const impuesto = subTotal * 0.12; // 12% ISV
       setIsv(impuesto.toFixed(2));
       setTotal((subTotal + impuesto).toFixed(2));
-      console.log("ultima venbta",ultimaVenta);
+      //console.log("ultima venbta",ultimaVenta);
       // Obtener el último número de factura
       let facturasGuardadas = JSON.parse(localStorage.getItem("facturas")) || [];
       let nuevoNumero = facturasGuardadas.length + 1;
@@ -79,7 +79,7 @@ function VentasFactura() {
       headStyles: { fillColor: [44, 62, 80], textColor: 255, fontSize: 14 },
       columnStyles: { 0: { fontStyle: "bold" } }
     });
-    console.log(venta)
+    //console.log(venta)
     // ✅ Descargar el PDF con un nombre dinámico
     doc.save(`Factura_${venta.cliente_nombre.replace(/\s+/g, "_")}.pdf`);
   };
