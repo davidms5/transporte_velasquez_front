@@ -8,7 +8,7 @@ function RegistroRepuesto() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    repuesto_id: "", // Esto es opcional
+    repuesto_id_unico: "", // Esto es opcional
     factura_codigo: "",
     nombre: "",
     cantidad: "",
@@ -32,7 +32,7 @@ function RegistroRepuesto() {
       if (continuar) {
         // Limpiar el formulario para nuevo registro
         setFormData({
-          repuesto_id: "",
+          repuesto_id_unico: "",
           factura_codigo: "",
           nombre: "",
           cantidad: "",
@@ -45,7 +45,7 @@ function RegistroRepuesto() {
 
     } catch (error) {
       console.error("Error al registrar el repuesto:", error);
-      alert("Error al registrar el repuesto. Por favor, inténtelo de nuevo.");
+      toast.error("Error al registrar el repuesto. Por favor, inténtelo de nuevo.");
     }
   };
 
@@ -57,9 +57,9 @@ function RegistroRepuesto() {
       <form className="registro-form" onSubmit={handleSubmit}>
         <input
           type="number"
-          name="repuesto_id"
+          name="repuesto_id_unico"
           placeholder="ID del Repuesto"
-          value={formData.repuesto_id}
+          value={formData.repuesto_id_unico}
           onChange={handleChange}
         />
 
