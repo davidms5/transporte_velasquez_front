@@ -48,7 +48,7 @@ function Inicio() {
 
       {/* ✅ Nuevo Botón para el módulo de Usuarios TODO: que solo lo pueda ver alguien con rol admin o similar*/}
       {[ROLES.ADMIN].includes(role) &&
-        <button className="module-button" onClick={() => { window.open(import.meta.env.VITE_ADMIN, "_blank")}}>
+        <button className="module-button" onClick={() => { window.location.href = `${import.meta.env.VITE_ADMIN}`}}>
         Módulo de Usuarios y admin
       </button>}
 
