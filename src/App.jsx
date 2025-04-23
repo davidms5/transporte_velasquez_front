@@ -77,6 +77,7 @@ function App() {
                 <Route path="/dashboard-gastos" element={<FacturacionRoute><DashboardGastos /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Gastos */}
                 <Route path="/dashboard-rutas" element={<FacturacionRoute><DashboardRutas /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Rutas */}
                 <Route path="/reporte-cierre-diario" element={<ReporteCierreDiario />} /> {/* ✅ Ruta Reporte De Cierre Diario */}
+                <Route path="/dashboard-ventas" element={<FacturacionSupervisorRoute> <DashboardVentas/></FacturacionSupervisorRoute> }/>
                 <Route path="/unauthorized" element={<><h2>No tienes permisos para ver esta página ❌</h2> <button onClick={() => navigate(-1)}> volver</button></>}/>
               </Routes>
             </RequireAuth>
