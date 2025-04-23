@@ -30,7 +30,8 @@ function Facturacion() {
   }, []);
 
   const handleChange = (e) => {
-    setFacturaData({ ...facturaData, [e.target.name]: e.target.value });
+
+    setFacturaData({ ...facturaData, [e.target.name]: e.target.value.replace(/\s+/g, '') });
   };
 
   const handleAgregarFactura = async () => {
