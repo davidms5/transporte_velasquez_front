@@ -54,6 +54,7 @@ function HistorialGastoCompras() {
               <th>Número de Factura</th>
               <th>Proveedor</th>
               <th>Cantidad</th>
+              <th>Precio Combustible</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +63,7 @@ function HistorialGastoCompras() {
                 <td>{gasto.numero_factura}</td>
                 <td>{gasto.proveedor}</td>
                 <td>{gasto.cantidad}</td>
+                <td>{gasto.precio_combustible}</td>
               </tr>
             ))}
           </tbody>
