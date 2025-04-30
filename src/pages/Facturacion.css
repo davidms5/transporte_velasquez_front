@@ -1,12 +1,17 @@
 .back-button {
   margin-bottom: 20px;
   padding: 10px 15px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: #444444;      /* Fondo gris oscuro */
+  color: #ffffff;                 /* Texto blanco para mejor visibilidad */
+  border: 1px solid #222222;      /* Borde más oscuro */
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;              /* Letra más marcada */
+  font-size: 16px;                /* Tamaño de letra legible */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: #e0e0e0;
+  background-color: #333333;      /* Fondo aún más oscuro al hacer hover */
+  color: #dddddd;                 /* Texto ligeramente más claro en hover */
 }
