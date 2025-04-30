@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { apiClient } from "../shared/services/apiClient";
+import * as XLSX from "xlsx"; // <--- Importamos XLSX
 import "./ReporteCierreDiario.css";
 
 function ReporteCierreDiario() {
@@ -23,19 +24,39 @@ function ReporteCierreDiario() {
 
     try {
       const response = await apiClient.get(`/ventas/cierre-diario/generar/?fecha=${fecha}`);
-      // Aquí puedes manejar cómo mostrar los datos del reporte
-      console.log(response.data);
       setDatosReporte(response.data);
       toast.success("Reporte generado correctamente.");
     } catch (error) {
       console.error("Error al generar el reporte:", error);
       toast.error("Error al generar el reporte.");
-      setDatosReporte(null); // Limpiar datos en caso de error
+      setDatosReporte(null);
     }
   };
 
+  const exportarExcel = () => {
+    if (!datosReporte) {
+      toast.error("No hay datos para exportar.");
+      return;
+    }
+
+    const data = [
+      {
+        Fecha: datosReporte.fecha,
+        "Total de Facturas": datosReporte.total_facturas,
+        "Total en Lempiras": datosReporte.total_monto,
+      },
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Cierre Diario");
+
+    XLSX.writeFile(workbook, `reporte_cierre_diario_${fecha}.xlsx`);
+  };
+
   useEffect(() => {
-    generarReporte();
+    generarReporte(); // carga automática con la fecha actual
   }, []);
 
   return (
@@ -61,9 +82,17 @@ function ReporteCierreDiario() {
           <p><strong>Total en Lempiras:</strong> L {Number(datosReporte.total_monto).toFixed(2)}</p>
         </div>
       )}
-      <button className="btn generar-btn" onClick={generarReporte}>
-        Generar Reporte
-      </button>
+
+      <div className="botones-reporte">
+        <button className="btn generar-btn" onClick={generarReporte}>
+          Generar Reporte
+        </button>
+        {datosReporte && (
+          <button className="btn excel-btn" onClick={exportarExcel}>
+            Exportar a Excel
+          </button>
+        )}
+      </div>
     </div>
   );
 }

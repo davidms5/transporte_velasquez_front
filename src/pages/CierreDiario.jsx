@@ -16,7 +16,7 @@ function CierreDiario() {
   const [loading, setLoading] = useState(false);
 
   const agregarFactura = () => {
-    if (factura && ruta && monto) {
+    if (ruta && monto) {
       setRegistro([...registro, { numero_factura: factura, numero_ruta: ruta, monto: parseFloat(monto) }]);
       setFactura("");
       setRuta("");

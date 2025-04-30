@@ -10,8 +10,6 @@ function HistorialRutas() {
   const [rutas, setRutas] = useState([]);
   const [asignaciones, setAsignaciones] = useState([]);
   const [horarios, setHorarios] = useState([]);
-  const [desde, setDesde] = useState("");
-  const [hasta, setHasta] = useState("");
 
   const [paginaRutas, setPaginaRutas] = useState(1);
   const [paginaAsignaciones, setPaginaAsignaciones] = useState(1);
@@ -29,13 +27,7 @@ function HistorialRutas() {
   };
 
   const fetchHistorial = async () => {
-    let url = "/rutas-buses/historial/rutas/";
-    const params = [];
-
-    if (desde) params.push(`desde=${desde}`);
-    if (hasta) params.push(`hasta=${hasta}`);
-    if (params.length > 0) url += `?${params.join("&")}`;
-
+    const url = "/rutas-buses/historial/rutas/";
     try {
       const response = await apiClient.get(url);
       const data = response.data;
@@ -97,16 +89,6 @@ function HistorialRutas() {
       <div className="historial-box">
         <h2 className="historial-title">Historial de Rutas</h2>
         <p className="historial-description">Visualiza el historial completo de las rutas, asignaciones y horarios.</p>
-
-        <div className="historial-filtros">
-          <label>Desde:</label>
-          <input type="date" value={desde} onChange={(e) => setDesde(e.target.value)} />
-
-          <label>Hasta:</label>
-          <input type="date" value={hasta} onChange={(e) => setHasta(e.target.value)} />
-
-          <button className="btn" onClick={fetchHistorial}>Filtrar</button>
-        </div>
 
         {/* Rutas Agregadas */}
         <div className="historial-section">
