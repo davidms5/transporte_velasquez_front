@@ -5,7 +5,14 @@ import "./HistorialGastoCompras.css";
 
 function HistorialGastoCompras() {
   const [historial, setHistorial] = useState([]);
-  const [fecha, setFecha] = useState(() => new Date().toISOString().split("T")[0]);
+  const [fecha, setFecha] = useState(() => {
+    return new Date().toLocaleDateString('es-HN', {
+      timeZone: 'America/Tegucigalpa',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).split('/').reverse().join('-');
+  });
 
   const getHistorial = async () => {
     try {
@@ -48,13 +55,14 @@ function HistorialGastoCompras() {
       {historial.length === 0 ? (
         <p>No hay registros de gasto de compras.</p>
       ) : (
+        <>
         <table className="historial-gasto-compras-table">
           <thead>
             <tr>
               <th>Número de Factura</th>
               <th>Proveedor</th>
               <th>Cantidad</th>
-              <th>Precio Combustible</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -63,11 +71,34 @@ function HistorialGastoCompras() {
                 <td>{gasto.numero_factura}</td>
                 <td>{gasto.proveedor}</td>
                 <td>{gasto.cantidad}</td>
-                <td>{gasto.precio_combustible}</td>
+               
               </tr>
             ))}
           </tbody>
         </table>
+
+          
+          {/* Tabla 2: Combustible por bus */}
+          <h4 className="separador-tabla">Detalle por Combustible</h4>
+          <table className="historial-gasto-compras-table">
+            <thead>
+              <tr>
+                <th>Número de Factura</th>
+                <th>Número de Bus</th>
+                <th>Precio Combustible</th>
+              </tr>
+            </thead>
+            <tbody>
+              {historial.map((gasto, index) => (
+                <tr key={index}>
+                  <td>{gasto.numero_factura}</td>
+                  <td>{gasto.bus_numero_id || "No asignado"}</td>
+                  <td>{gasto.precio_combustible ?? "N/A"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
 
       {/* Botón para generar el reporte en Excel */}
