@@ -1,11 +1,5 @@
 import axios from "axios";
-
-function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  if (match) return match[2];
-  return null;
-} //TODO: remover despues
-
+import { toast } from "react-toastify";
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // Accedemos a la variable
   timeout: 10000,
@@ -22,4 +16,22 @@ apiClient.interceptors.request.use((config) => {
   return config;
 })
 
-export  {apiClient, getCookie};
+apiClient.interceptors.response.use(
+  (response) => response, // si va todo bien, lo deja pasar
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expirado o inválido
+      toast.error("Sesión expirada. Por favor, iniciá sesión nuevamente.");
+
+      // Limpiar el token
+      sessionStorage.removeItem("jwt_token");
+
+      // Redirigir al login
+      window.location.replace("/"); // o usar navigate() si estás dentro de un hook
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export  {apiClient};

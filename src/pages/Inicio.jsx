@@ -17,36 +17,40 @@ function Inicio() {
       <h2 className="subtitle">Seleccione el módulo que desea acceder</h2>
 
       {/* Botón para ir al módulo de Repuestos */}
-      <button className="module-button" onClick={() => navigate("/repuestos")}>
+      {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+      (<button className="module-button" onClick={() => navigate("/repuestos")}>
         Módulo de Repuestos
-      </button>
+      </button>)}
 
       {/* Botón para ir al módulo de Rutas */}
-      <button className="module-button" onClick={() => navigate("/rutas")}>
+      {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.OPERADOR].includes(role) &&
+      (<button className="module-button" onClick={() => navigate("/rutas")}>
         Módulo de Rutas
-      </button>
+      </button>)}
 
       {/* Botón para ir al módulo de Ventas */}
-      <button className="module-button" onClick={() => navigate("/ventas")}>
+      {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.FACTURACION].includes(role) &&
+        <button className="module-button" onClick={() => navigate("/ventas")}>
         Módulo de Ventas
-      </button>
+      </button>}
 
       {/* ✅ Botón para el módulo de Gastos */}
-      {[ROLES.ADMIN, ROLES.OPERADOR].includes(role) &&
+      {[ROLES.ADMIN, ROLES.OPERADOR, ROLES.FACTURACION].includes(role) &&
       (<button className="module-button" onClick={() => navigate("/gastos")}>
         Módulo de Gastos
       </button>)}
 
       {/* ✅ Nuevo Botón para el módulo de Estadística */}
-      {[ROLES.ADMIN, ROLES.FACTURACION].includes(role) && 
+      {[ROLES.ADMIN, ROLES.FACTURACION, ROLES.SUPERVISOR].includes(role) && 
       (<button className="module-button" onClick={() => navigate("/estadistica")}>
         Módulo de Estadística
       </button>)}
 
       {/* ✅ Nuevo Botón para el módulo de Usuarios TODO: que solo lo pueda ver alguien con rol admin o similar*/}
-      <button className="module-button" onClick={() => { window.open(import.meta.env.VITE_ADMIN, "_blank")}}>
+      {[ROLES.ADMIN].includes(role) &&
+        <button className="module-button" onClick={() => { window.location.href = `${import.meta.env.VITE_ADMIN}`}}>
         Módulo de Usuarios y admin
-      </button>
+      </button>}
 
       <button className="module-button" onClick={logout}>
         log out

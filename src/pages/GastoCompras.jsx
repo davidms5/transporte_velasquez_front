@@ -31,7 +31,7 @@ function GastoCompras() {
       const data = response.data;
 
       toast.success(`✅ Combustible registrado. UUID: ${data.uuid_combustible}`);
-      console.log("Respuesta de Django:", data);
+      //console.log("Respuesta de Django:", data);
 
       setFactura("");
       setProveedor("");

@@ -23,7 +23,7 @@ function Gasolina() {
       })
 
       toast.success(response.data.mensaje || "Gasolina actualizada correctamente ✅");
-      console.log("Respuesta:", response.data);
+      //console.log("Respuesta:", response.data);
       // Limpiar campos
       setFactura("");
       setMonto("");

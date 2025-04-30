@@ -24,9 +24,10 @@ function Gastos() {
             Gasolina
           </button>)}
 
-          <button className="module-button" onClick={() => navigate("/historial-gasto-compras")}>
+          {[ROLES.ADMIN,ROLES.SUPERVISOR].includes(roles) &&
+          (<button className="module-button" onClick={() => navigate("/historial-gasto-compras")}>
             Historial Gasto de Compras
-          </button>
+          </button>)}
 
           
         </div>

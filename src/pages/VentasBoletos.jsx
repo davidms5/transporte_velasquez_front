@@ -50,6 +50,7 @@ function VentasBoletos() {
       try {
         const response = await apiClient.get("/rutas-buses/rutas-con-horario/");
         setRutas(response.data);
+        console.log("Rutas cargadas:", response.data);
       } catch (error) {
         console.error("Error cargando rutas:", error);
       }
@@ -71,7 +72,7 @@ function VentasBoletos() {
     try {
       const response = await apiClient.get(`/rutas-buses/rutas/${e.target.value}/horarios/`);
       setHorariosRuta(response.data);
-      console.log(response.data, rutaSeleccionada, e.target.value);
+      //console.log(response.data, rutaSeleccionada, e.target.value);
     } catch (error) {
       console.error("Error cargando horarios:", error);
       setHorariosRuta([]);

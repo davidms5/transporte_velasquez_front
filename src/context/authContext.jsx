@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { saveEncryptItem } from "../shared/services/secureStorage";
+import { apiClient } from "../shared/services/apiClient";
 
 const AuthContext = createContext();
 
@@ -38,11 +39,27 @@ export const AuthProvider = ({ children }) => {
     navigate("/inicio");
   };
 
-  const logout = () => {
-    sessionStorage.removeItem("jwt_token");
-    sessionStorage.removeItem("role")
-    setIsAuthenticated(false);
-    navigate("/");
+  const logout = async () => {
+
+    try {
+      
+      await apiClient.post("/usuarios/logout/");
+
+      sessionStorage.removeItem("jwt_token");
+      sessionStorage.removeItem("role");
+      setIsAuthenticated(false);
+      navigate("/");
+
+    } catch (error) {
+      if (error.response?.status === 401) {
+        // Token expirado o no enviado
+        toast.warning("Sesión expirada");
+      } else {
+        toast.error("Error al cerrar sesión");
+      }
+    }
+
+    
   };
 
   return (
