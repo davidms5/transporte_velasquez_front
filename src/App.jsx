@@ -54,11 +54,11 @@ function App() {
                 <Route path="/reportes" element={<OperadorSupervisorRoute><Reportes /> </OperadorSupervisorRoute> } />
                 <Route path="/historial" element={<OperadorSupervisorRoute><Historial /> </OperadorSupervisorRoute> } />
                 <Route path="/dar-de-baja" element={<SupervisorRoute> <DarDeBaja /></SupervisorRoute> } />
-                <Route path="/rutas" element={<OperadorSupervisorRoute><Rutas /> </OperadorSupervisorRoute> } />
-                <Route path="/registro-ruta" element={<OperadorRoute><RegistroRuta /> </OperadorRoute> } />
+                <Route path="/rutas" element={<SupervisorRoute><Rutas /> </SupervisorRoute> } />
+                <Route path="/registro-ruta" element={<SupervisorRoute><RegistroRuta /> </SupervisorRoute> } />
                 <Route path="/agregar-ruta" element={<SupervisorRoute><AgregarRuta /> </SupervisorRoute> } />
                 <Route path="/asignacion-rutas" element={<SupervisorRoute><AsignacionRutas /> </SupervisorRoute> } />
-                <Route path="/horario" element={<OperadorRoute><Horario /> </OperadorRoute> } />
+                <Route path="/horario" element={<SupervisorRoute><Horario /> </SupervisorRoute> } />
                 <Route path="/historial-rutas" element={<SupervisorRoute><HistorialRutas /> </SupervisorRoute> } />
                 <Route path="/existencia-repuestos" element={<OperadorSupervisorRoute>  <ExistenciaRepuestos /></OperadorSupervisorRoute>} />
                 <Route path="/facturacion" element={<FacturacionSupervisorRoute><Facturacion /> </FacturacionSupervisorRoute>  } />
@@ -67,13 +67,13 @@ function App() {
                 <Route path="/ventas-factura" element={<VentasFactura />} />
                 <Route path="/anular-facturas" element={<FacturacionRoute> <AnularFacturas /></FacturacionRoute> } />
                 <Route path="/reporte-ventas" element={<ReporteVentas />} />
-                <Route path="/cierre-diario" element={<SupervisorRoute><CierreDiario /></SupervisorRoute> } />
+                <Route path="/cierre-diario" element={<FacturacionSupervisorRoute><CierreDiario /></FacturacionSupervisorRoute> } />
                 <Route path="/resumen-por-ruta" element={<ResumenPorRuta />} />
-                <Route path="/gastos" element={<OperadorFacturacionRoute><Gastos /> </OperadorFacturacionRoute> } />
+                <Route path="/gastos" element={<OperadorRoute><Gastos /> </OperadorRoute> } />
                 <Route path="/gastos-gasolina" element={<OperadorRoute><Gasolina /> </OperadorRoute> } />
                 <Route path="/gastos-compras" element={<OperadorRoute><GastoCompras /> </OperadorRoute> } />
                 <Route path="/historial-gasto-compras" element={<SupervisorRoute><HistorialGastoCompras /></SupervisorRoute> } />
-                <Route path="/estadistica" element={<FacturacionSupervisorRoute><Estadistica /> </FacturacionSupervisorRoute> } /> {/* ✅ Ruta Estadística */}
+                <Route path="/estadistica" element={<SupervisorRoute><Estadistica /> </SupervisorRoute> } /> {/* ✅ Ruta Estadística */}
                 <Route path="/dashboard-gastos" element={<FacturacionRoute><DashboardGastos /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Gastos */}
                 <Route path="/dashboard-rutas" element={<FacturacionRoute><DashboardRutas /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Rutas */}
                 <Route path="/reporte-cierre-diario" element={<ReporteCierreDiario />} /> {/* ✅ Ruta Reporte De Cierre Diario */}
