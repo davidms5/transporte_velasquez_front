@@ -16,7 +16,7 @@ function Gasolina() {
 
     try {
       
-      const response = await apiClient.post("ventas/gastos/combustible/actualizar/", {
+      const response = await apiClient.post("ventas/gastos/combustible-registrar/", {
         numero_factura: factura,
         precio_combustible: parseFloat(monto),
         numero_bus: bus,
