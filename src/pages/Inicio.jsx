@@ -17,7 +17,7 @@ function Inicio() {
       <h2 className="subtitle">Seleccione el módulo que desea acceder</h2>
 
       {/* Botón para ir al módulo de Repuestos */}
-      {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.OPERADOR].includes(role) &&
+      {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
       (<button className="module-button" onClick={() => navigate("/repuestos")}>
         Módulo de Repuestos
       </button>)}
