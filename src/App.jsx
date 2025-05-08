@@ -63,9 +63,9 @@ function App() {
                 <Route path="/existencia-repuestos" element={<OperadorSupervisorRoute>  <ExistenciaRepuestos /></OperadorSupervisorRoute>} />
                 <Route path="/facturacion" element={<FacturacionSupervisorRoute><Facturacion /> </FacturacionSupervisorRoute>  } />
                 <Route path="/ventas" element={<FacturacionSupervisorRoute><Ventas /></FacturacionSupervisorRoute> } />
-                <Route path="/ventas-boletos" element={<FacturacionRoute><VentasBoletos /> </FacturacionRoute> } />
+                <Route path="/ventas-boletos" element={<FacturacionSupervisorRoute><VentasBoletos /> </FacturacionSupervisorRoute> } />
                 <Route path="/ventas-factura" element={<VentasFactura />} />
-                <Route path="/anular-facturas" element={<FacturacionRoute> <AnularFacturas /></FacturacionRoute> } />
+                <Route path="/anular-facturas" element={<FacturacionSupervisorRoute> <AnularFacturas /></FacturacionSupervisorRoute> } />
                 <Route path="/reporte-ventas" element={<ReporteVentas />} />
                 <Route path="/cierre-diario" element={<FacturacionSupervisorRoute><CierreDiario /></FacturacionSupervisorRoute> } />
                 <Route path="/resumen-por-ruta" element={<ResumenPorRuta />} />
