@@ -29,10 +29,10 @@ function Repuestos() {
           Existencia de Repuestos
         </button>)}
 
-        {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.FACTURACION].includes(roles) &&
-        (<button className="module-button" onClick={() => navigate("/facturacion")}>
+     
+        <button className="module-button" onClick={() => navigate("/facturacion")}>
           Facturación
-        </button>)}
+        </button>
 
         {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
         (<button className="module-button" onClick={() => navigate("/dar-de-baja")}>
