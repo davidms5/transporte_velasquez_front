@@ -35,7 +35,7 @@ import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FacturacionRoute, FacturacionSupervisorRoute, OperadorFacturacionRoute, OperadorRoute, OperadorSupervisorRoute, SupervisorRoute } from "./pages/security/RoleRoutes";
-import {ProtectedRoute} from "./pages/security/ProtectedRoute"
+import ProtectedRoute from "./pages/security/ProtectedRoute"
 import { useNavigate } from "react-router-dom";
 function App() {
 
