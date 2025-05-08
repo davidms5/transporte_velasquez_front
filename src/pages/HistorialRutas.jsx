@@ -31,6 +31,7 @@ function HistorialRutas() {
     try {
       const response = await apiClient.get(url);
       const data = response.data;
+      console.log(data)
       setRutas(data.rutas_agregadas || []);
       setAsignaciones(data.asignaciones_rutas || []);
       setHorarios(data.horarios_asignados || []);

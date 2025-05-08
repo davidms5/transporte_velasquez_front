@@ -49,7 +49,7 @@ function App() {
             <RequireAuth>
               <Routes>
                 <Route path="/inicio" element={<Inicio />} />
-                <Route path="/repuestos" element={<SupervisorRoute><Repuestos /></SupervisorRoute> } />
+                <Route path="/repuestos" element={<OperadorSupervisorRoute><Repuestos /></OperadorSupervisorRoute> } />
                 <Route path="/registro-repuesto" element={<OperadorRoute><RegistroRepuesto /> </OperadorRoute> } />
                 <Route path="/reportes" element={<OperadorSupervisorRoute><Reportes /> </OperadorSupervisorRoute> } />
                 <Route path="/historial" element={<OperadorSupervisorRoute><Historial /> </OperadorSupervisorRoute> } />
@@ -74,8 +74,8 @@ function App() {
                 <Route path="/gastos-compras" element={<OperadorRoute><GastoCompras /> </OperadorRoute> } />
                 <Route path="/historial-gasto-compras" element={<SupervisorRoute><HistorialGastoCompras /></SupervisorRoute> } />
                 <Route path="/estadistica" element={<SupervisorRoute><Estadistica /> </SupervisorRoute> } /> {/* ✅ Ruta Estadística */}
-                <Route path="/dashboard-gastos" element={<FacturacionRoute><DashboardGastos /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Gastos */}
-                <Route path="/dashboard-rutas" element={<FacturacionRoute><DashboardRutas /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Rutas */}
+                <Route path="/dashboard-gastos" element={<FacturacionSupervisorRoute><DashboardGastos /> </FacturacionSupervisorRoute> } /> {/* ✅ Ruta Dashboard de Gastos */}
+                <Route path="/dashboard-rutas" element={<FacturacionSupervisorRoute><DashboardRutas /> </FacturacionSupervisorRoute> } /> {/* ✅ Ruta Dashboard de Rutas */}
                 <Route path="/reporte-cierre-diario" element={<ReporteCierreDiario />} /> {/* ✅ Ruta Reporte De Cierre Diario */}
                 <Route path="/dashboard-ventas" element={<FacturacionSupervisorRoute> <DashboardVentas/></FacturacionSupervisorRoute> }/>
                 <Route path="/unauthorized" element={<><h2>No tienes permisos para ver esta página ❌</h2> <button onClick={() => navigate(-1)}> volver</button></>}/>
