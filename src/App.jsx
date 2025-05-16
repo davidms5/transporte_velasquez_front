@@ -37,6 +37,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FacturacionRoute, FacturacionSupervisorRoute, OperadorFacturacionRoute, OperadorRoute, OperadorSupervisorRoute, SupervisorRoute } from "./pages/security/RoleRoutes";
 import ProtectedRoute from "./pages/security/ProtectedRoute"
 import { useNavigate } from "react-router-dom";
+import { ROLES } from "./shared/constants/roles";
 function App() {
 
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function App() {
                 <Route path="/horario" element={<SupervisorRoute><Horario /> </SupervisorRoute> } />
                 <Route path="/historial-rutas" element={<SupervisorRoute><HistorialRutas /> </SupervisorRoute> } />
                 <Route path="/existencia-repuestos" element={<OperadorSupervisorRoute>  <ExistenciaRepuestos /></OperadorSupervisorRoute>} />
-                <Route path="/facturacion" element={<ProtectedRoute><Facturacion /> </ProtectedRoute>  } />
+                <Route path="/facturacion" element={<ProtectedRoute roles={[ROLES.ADMIN,ROLES.SUPERVISOR, ROLES.OPERADOR, ROLES.FACTURACION]}><Facturacion /> </ProtectedRoute>  } />
                 <Route path="/ventas" element={<FacturacionSupervisorRoute><Ventas /></FacturacionSupervisorRoute> } />
                 <Route path="/ventas-boletos" element={<FacturacionSupervisorRoute><VentasBoletos /> </FacturacionSupervisorRoute> } />
                 <Route path="/ventas-factura" element={<VentasFactura />} />
