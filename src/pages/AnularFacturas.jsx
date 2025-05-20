@@ -11,8 +11,6 @@ function AnularFacturas() {
   const [facturaSeleccionada, setFacturaSeleccionada] = useState("");
 
   useEffect(() => {
-    //const facturasGuardadas = JSON.parse(localStorage.getItem("facturas")) || [];
-    //setFacturas(facturasGuardadas);
     const fetchFacturas = async () => {
       try {
         const response = await apiClient.get("/ventas/facturas-activas/");
@@ -24,12 +22,24 @@ function AnularFacturas() {
     };
 
     fetchFacturas();
-
   }, []);
 
-  const handleDeleteFactura = async() => {
-    if (!facturaSeleccionada) return;
+  // 🔐 Validación previa con código
+  const handleProtectedDelete = () => {
+    if (!facturaSeleccionada) {
+      alert("Seleccione una factura antes de continuar.");
+      return;
+    }
 
+    const codigo = prompt("Ingrese el código de confirmación para anular la factura:");
+    if (codigo === "2025") {
+      handleDeleteFactura();
+    } else {
+      alert("Código incorrecto. No se anuló la factura.");
+    }
+  };
+
+  const handleDeleteFactura = async () => {
     try {
       await apiClient.delete(`/ventas/facturas/${facturaSeleccionada}/anular/`);
       toast.success("Factura anulada correctamente.");
@@ -40,13 +50,7 @@ function AnularFacturas() {
     } catch (error) {
       console.error("Error al anular factura:", error);
       toast.error("No se pudo anular la factura.");
-      return;
     }
-    //const nuevasFacturas = facturas.filter(factura => factura.numeroFactura !== facturaSeleccionada);
-    //localStorage.setItem("facturas", JSON.stringify(nuevasFacturas));
-    //setFacturas(nuevasFacturas);
-    //setFacturaSeleccionada("");
-    //alert("Factura eliminada exitosamente.");
   };
 
   return (
@@ -64,7 +68,7 @@ function AnularFacturas() {
           ))}
         </select>
 
-        <button className="btn delete-btn" onClick={handleDeleteFactura}>Eliminar Factura</button>
+        <button className="btn delete-btn" onClick={handleProtectedDelete}>Eliminar Factura</button>
         <button className="btn back-btn" onClick={() => navigate("/ventas")}>Regresar</button>
       </div>
     </div>

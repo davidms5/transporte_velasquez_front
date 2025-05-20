@@ -1,35 +1,65 @@
 .dar-de-baja-page {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(to right, #1E3A5F, #A8B5C3);
-    color: white;
-    padding: 40px;
-    text-align: center;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    color: #FFD700;
-  }
-  
-  .repuestos-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .repuestos-list li {
-    margin: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .submit-button {
-    background-color: #FF4500;
-    padding: 10px 15px;
-    border-radius: 5px;
-    color: white;
-  }
-  
-  .submit-button:hover {
-    background-color: #E63E00;
-  }
-  
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, #1E3A5F, #A8B5C3);
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #FFD700;
+}
+
+.repuestos-list {
+  list-style: none;
+  padding: 0;
+}
+
+.repuestos-list li {
+  margin: 10px;
+  font-size: 1.2rem;
+}
+
+input[type="number"] {
+  color: #003366; /* Azul oscuro */
+  background-color: #f0f0f0;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  width: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.submit-button {
+  background-color: #FF4500;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #E63E00;
+}
+
+.back-button {
+  background-color: #3498db;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.back-button:hover {
+  background-color: #2980b9;
+}
