@@ -12,6 +12,23 @@ function RegistroRuta() {
   //  numeroBus: "",
   //  placa: "",
   //});
+  const mostrarErrores = (errores, prefix = "") => {
+  for (const key in errores) {
+    const valor = errores[key];
+    const label = prefix ? `${prefix}.${key}` : key;
+
+    if (typeof valor === "string") {
+      toast.error(`${label}: ${valor}`);
+    } else if (Array.isArray(valor)) {
+      valor.forEach((msg) => toast.error(`${label}: ${msg}`));
+    } else if (typeof valor === "object" && valor !== null) {
+      // Si es otro objeto, profundiza
+      mostrarErrores(valor, label);
+    } else {
+      toast.error(`${label}: Error desconocido`);
+    }
+  }
+};
 
   const [registroData, setRegistroData] = useState({
     conductor: {
@@ -66,16 +83,7 @@ function RegistroRuta() {
       console.error("Error al registrar:", error);
       //alert("Error al registrar. Revisa los datos.");
       if (error.response && error.response.status === 400) {
-        const errores = error.response.data;
-        for (const key in errores) {
-          if (typeof errores[key] === 'string') {
-            toast.error(`${key}: ${errores[key]}`);
-          } else if (Array.isArray(errores[key])) {
-            errores[key].forEach((msg) => toast.error(`${key}: ${msg}`));
-          } else {
-            toast.error(`${key}: Error desconocido`);
-          }
-        }
+        mostrarErrores(error.response.data);
       } else {
         toast.error("Error inesperado al registrar conductor y bus.");
       }
