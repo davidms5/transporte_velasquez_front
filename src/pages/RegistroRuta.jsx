@@ -64,7 +64,21 @@ function RegistroRuta() {
       });
     } catch (error) {
       console.error("Error al registrar:", error);
-      alert("Error al registrar. Revisa los datos.");
+      //alert("Error al registrar. Revisa los datos.");
+      if (error.response && error.response.status === 400) {
+        const errores = error.response.data;
+        for (const key in errores) {
+          if (typeof errores[key] === 'string') {
+            toast.error(`${key}: ${errores[key]}`);
+          } else if (Array.isArray(errores[key])) {
+            errores[key].forEach((msg) => toast.error(`${key}: ${msg}`));
+          } else {
+            toast.error(`${key}: Error desconocido`);
+          }
+        }
+      } else {
+        toast.error("Error inesperado al registrar conductor y bus.");
+      }
     }
 
     //alert(`Registro Guardado: 
