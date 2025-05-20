@@ -14,6 +14,7 @@ function DarDeBaja() {
     const fetchRepuestos = async () => {
       try {
         const response = await apiClient.get("/inventario/get-repuestos/");
+
         setRepuestos(response.data.results);
       } catch (error) {
         console.error("Error al obtener repuestos:", error);

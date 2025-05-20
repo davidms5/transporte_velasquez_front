@@ -64,6 +64,7 @@ function RegistroRepuesto() {
           type="number"
           name="repuesto_id_unico"
           placeholder="ID del Repuesto"
+          required
           value={formData.repuesto_id_unico}
           onChange={handleChange}
         />

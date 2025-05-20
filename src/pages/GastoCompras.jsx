@@ -22,7 +22,7 @@ function GastoCompras() {
     //});
     try {
       
-      const response = await apiClient.post("ventas/gastos/combustible-registrar/", {
+      const response = await apiClient.post("ventas/gastos/ingresar-gasto/", {
         numero_factura: factura,
         proveedor: proveedor,
         cantidad: parseFloat(cantidad),

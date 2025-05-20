@@ -35,7 +35,9 @@ import RequireAuth from "./Components/requireAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FacturacionRoute, FacturacionSupervisorRoute, OperadorFacturacionRoute, OperadorRoute, OperadorSupervisorRoute, SupervisorRoute } from "./pages/security/RoleRoutes";
+import ProtectedRoute from "./pages/security/ProtectedRoute"
 import { useNavigate } from "react-router-dom";
+import { ROLES } from "./shared/constants/roles";
 function App() {
 
   const navigate = useNavigate();
@@ -49,33 +51,33 @@ function App() {
             <RequireAuth>
               <Routes>
                 <Route path="/inicio" element={<Inicio />} />
-                <Route path="/repuestos" element={<SupervisorRoute><Repuestos /></SupervisorRoute> } />
+                <Route path="/repuestos" element={<OperadorSupervisorRoute><Repuestos /></OperadorSupervisorRoute> } />
                 <Route path="/registro-repuesto" element={<OperadorRoute><RegistroRepuesto /> </OperadorRoute> } />
                 <Route path="/reportes" element={<OperadorSupervisorRoute><Reportes /> </OperadorSupervisorRoute> } />
                 <Route path="/historial" element={<OperadorSupervisorRoute><Historial /> </OperadorSupervisorRoute> } />
                 <Route path="/dar-de-baja" element={<SupervisorRoute> <DarDeBaja /></SupervisorRoute> } />
-                <Route path="/rutas" element={<OperadorSupervisorRoute><Rutas /> </OperadorSupervisorRoute> } />
-                <Route path="/registro-ruta" element={<OperadorRoute><RegistroRuta /> </OperadorRoute> } />
+                <Route path="/rutas" element={<SupervisorRoute><Rutas /> </SupervisorRoute> } />
+                <Route path="/registro-ruta" element={<SupervisorRoute><RegistroRuta /> </SupervisorRoute> } />
                 <Route path="/agregar-ruta" element={<SupervisorRoute><AgregarRuta /> </SupervisorRoute> } />
                 <Route path="/asignacion-rutas" element={<SupervisorRoute><AsignacionRutas /> </SupervisorRoute> } />
-                <Route path="/horario" element={<OperadorRoute><Horario /> </OperadorRoute> } />
+                <Route path="/horario" element={<SupervisorRoute><Horario /> </SupervisorRoute> } />
                 <Route path="/historial-rutas" element={<SupervisorRoute><HistorialRutas /> </SupervisorRoute> } />
                 <Route path="/existencia-repuestos" element={<OperadorSupervisorRoute>  <ExistenciaRepuestos /></OperadorSupervisorRoute>} />
-                <Route path="/facturacion" element={<FacturacionSupervisorRoute><Facturacion /> </FacturacionSupervisorRoute>  } />
+                <Route path="/facturacion" element={<ProtectedRoute roles={[ROLES.ADMIN,ROLES.SUPERVISOR, ROLES.OPERADOR, ROLES.FACTURACION]}><Facturacion /> </ProtectedRoute>  } />
                 <Route path="/ventas" element={<FacturacionSupervisorRoute><Ventas /></FacturacionSupervisorRoute> } />
-                <Route path="/ventas-boletos" element={<FacturacionRoute><VentasBoletos /> </FacturacionRoute> } />
+                <Route path="/ventas-boletos" element={<FacturacionSupervisorRoute><VentasBoletos /> </FacturacionSupervisorRoute> } />
                 <Route path="/ventas-factura" element={<VentasFactura />} />
-                <Route path="/anular-facturas" element={<FacturacionRoute> <AnularFacturas /></FacturacionRoute> } />
+                <Route path="/anular-facturas" element={<FacturacionSupervisorRoute> <AnularFacturas /></FacturacionSupervisorRoute> } />
                 <Route path="/reporte-ventas" element={<ReporteVentas />} />
-                <Route path="/cierre-diario" element={<SupervisorRoute><CierreDiario /></SupervisorRoute> } />
+                <Route path="/cierre-diario" element={<FacturacionSupervisorRoute><CierreDiario /></FacturacionSupervisorRoute> } />
                 <Route path="/resumen-por-ruta" element={<ResumenPorRuta />} />
-                <Route path="/gastos" element={<OperadorFacturacionRoute><Gastos /> </OperadorFacturacionRoute> } />
+                <Route path="/gastos" element={<OperadorRoute><Gastos /> </OperadorRoute> } />
                 <Route path="/gastos-gasolina" element={<OperadorRoute><Gasolina /> </OperadorRoute> } />
                 <Route path="/gastos-compras" element={<OperadorRoute><GastoCompras /> </OperadorRoute> } />
                 <Route path="/historial-gasto-compras" element={<SupervisorRoute><HistorialGastoCompras /></SupervisorRoute> } />
-                <Route path="/estadistica" element={<FacturacionSupervisorRoute><Estadistica /> </FacturacionSupervisorRoute> } /> {/* ✅ Ruta Estadística */}
-                <Route path="/dashboard-gastos" element={<FacturacionRoute><DashboardGastos /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Gastos */}
-                <Route path="/dashboard-rutas" element={<FacturacionRoute><DashboardRutas /> </FacturacionRoute> } /> {/* ✅ Ruta Dashboard de Rutas */}
+                <Route path="/estadistica" element={<SupervisorRoute><Estadistica /> </SupervisorRoute> } /> {/* ✅ Ruta Estadística */}
+                <Route path="/dashboard-gastos" element={<FacturacionSupervisorRoute><DashboardGastos /> </FacturacionSupervisorRoute> } /> {/* ✅ Ruta Dashboard de Gastos */}
+                <Route path="/dashboard-rutas" element={<FacturacionSupervisorRoute><DashboardRutas /> </FacturacionSupervisorRoute> } /> {/* ✅ Ruta Dashboard de Rutas */}
                 <Route path="/reporte-cierre-diario" element={<ReporteCierreDiario />} /> {/* ✅ Ruta Reporte De Cierre Diario */}
                 <Route path="/dashboard-ventas" element={<FacturacionSupervisorRoute> <DashboardVentas/></FacturacionSupervisorRoute> }/>
                 <Route path="/unauthorized" element={<><h2>No tienes permisos para ver esta página ❌</h2> <button onClick={() => navigate(-1)}> volver</button></>}/>

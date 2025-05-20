@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import "./Ventas.css"; // Importamos los estilos CSS
 import { ROLES } from "../shared/constants/roles";
 import { getUserRole } from "../shared/services/auth";
@@ -29,7 +29,7 @@ function Ventas() {
         </button>
 
         {/* Submódulo: Cierre Diario */}
-        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(role) &&
+        {[ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.FACTURACION].includes(role) &&
         (<button className="module-button" onClick={() => navigate("/cierre-diario")}>
           Cierre Diario
         </button>)}

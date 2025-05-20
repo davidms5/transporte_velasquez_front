@@ -13,7 +13,7 @@ function Rutas() {
 
       <div className="rutas-buttons">
 
-        {[ROLES.ADMIN, ROLES.OPERADOR].includes(roles) &&
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
         (<button className="rutas-button" onClick={() => navigate("/registro-ruta")}>
           Registro
         </button>)}
@@ -28,7 +28,7 @@ function Rutas() {
           Asignación de Rutas
         </button>)}
 
-        {[ROLES.ADMIN, ROLES.OPERADOR].includes(roles) &&
+        {[ROLES.ADMIN, ROLES.SUPERVISOR].includes(roles) &&
         (<button className="rutas-button" onClick={() => navigate("/horario")}>
           Horario
         </button>)}
