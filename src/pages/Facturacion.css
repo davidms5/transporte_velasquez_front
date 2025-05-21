@@ -15,3 +15,26 @@
   background-color: #333333;      /* Fondo aún más oscuro al hacer hover */
   color: #dddddd;                 /* Texto ligeramente más claro en hover */
 }
+
+.modal-overlay {
+  position: fixed; /* Posiciona el overlay respecto a la ventana, no al flujo del documento */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté encima de todo */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* Encima del overlay */
+}
