@@ -44,8 +44,9 @@ function RegistroRepuesto() {
       }
 
     } catch (error) {
+      console.error("Error al registrar el repuesto:", error.response.data);
       if(error.response.data) {
-        toast.error(`${error.response.data[0]}`);
+        toast.error(`${JSON.stringify(error.response.data)}`);
       } else {
         console.error("Error al registrar el repuesto:", error);
         toast.error("Error al registrar el repuesto. Por favor, inténtelo de nuevo.");
