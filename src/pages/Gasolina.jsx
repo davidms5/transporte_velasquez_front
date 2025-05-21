@@ -30,8 +30,8 @@ function Gasolina() {
       setBus("");
 
     } catch (error) {
-      if (error.response?.data?.error) {
-        toast.error(error.response.data.error);
+      if (error.response?.data) {
+        toast.error(`${JSON.stringify(error.response.data)}`);
       } else {
         toast.error("Error inesperado al actualizar.");
       }
