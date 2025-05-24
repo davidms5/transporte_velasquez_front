@@ -13,8 +13,8 @@ function ExistenciaRepuestos() {
       try {
 
         const response = await apiClient.get("/inventario/get-repuestos/");
-
-        setRepuestos(response.data.results);
+        //.results
+        setRepuestos(response.data);
       } catch (error) {
         console.error("Error al obtener repuestos:", error);
       }
