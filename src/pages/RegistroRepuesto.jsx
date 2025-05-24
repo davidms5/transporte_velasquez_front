@@ -8,7 +8,7 @@ function RegistroRepuesto() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    repuesto_id_unico: "", // Esto es opcional
+    //repuesto_id_unico: "", // Esto es opcional
     factura_codigo: "",
     nombre: "",
     cantidad: "",
@@ -32,7 +32,7 @@ function RegistroRepuesto() {
       if (continuar) {
         // Limpiar el formulario para nuevo registro
         setFormData({
-          repuesto_id_unico: "",
+          //repuesto_id_unico: "",
           factura_codigo: "",
           nombre: "",
           cantidad: "",
@@ -60,14 +60,14 @@ function RegistroRepuesto() {
       <p>Ingresa los datos del nuevo repuesto.</p>
 
       <form className="registro-form" onSubmit={handleSubmit}>
-        <input
+        {/*<input
           type="number"
           name="repuesto_id_unico"
           placeholder="ID del Repuesto"
           required
           value={formData.repuesto_id_unico}
           onChange={handleChange}
-        />
+        />*/}
 
         <input
           type="text"
