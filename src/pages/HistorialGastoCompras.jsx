@@ -78,7 +78,7 @@ function HistorialGastoCompras() {
         </table>
 
           
-          {/* Tabla 2: Combustible por bus */}
+          {/* Tabla 2: Combustible por bus 
           <h4 className="separador-tabla">Detalle por Combustible</h4>
           <table className="historial-gasto-compras-table">
             <thead>
@@ -97,7 +97,7 @@ function HistorialGastoCompras() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>*/}
         </>
       )}
 
