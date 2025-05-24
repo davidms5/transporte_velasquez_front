@@ -95,57 +95,57 @@ function DashboardGastos() {
     });
 
     // Chart 3: Línea total por factura
-    destroyChart(lineChartRef);
-    const ctx3 = lineChartRef.current.getContext("2d");
-    lineChartRef.current._chartInstance = new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: gastos.map(g => g.factura),
-        datasets: [{
-          label: "Total Gastado",
-          data: gastos.map(g => g.cantidad),
-          borderColor: "#36A2EB",
-          tension: 0.2,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { labels: { color: "#fff" } },
-        }
-      }
-    });
+    //destroyChart(lineChartRef);
+    //const ctx3 = lineChartRef.current.getContext("2d");
+    //lineChartRef.current._chartInstance = new Chart(ctx3, {
+    //  type: "line",
+    //  data: {
+    //    labels: gastos.map(g => g.factura),
+    //    datasets: [{
+    //      label: "Total Gastado",
+    //      data: gastos.map(g => g.cantidad),
+    //      borderColor: "#36A2EB",
+    //      tension: 0.2,
+    //    }]
+    //  },
+    //  options: {
+    //    responsive: true,
+    //    plugins: {
+    //      legend: { labels: { color: "#fff" } },
+    //    }
+    //  }
+    //});
 
     // Chart 4: Doughnut presupuesto
-    destroyChart(doughnutChartRef);
-    const ctx4 = doughnutChartRef.current.getContext("2d");
-    doughnutChartRef.current._chartInstance = new Chart(ctx4, {
-      type: "doughnut",
-      data: {
-        labels: ["Gastado", "Disponible"],
-        datasets: [{
-          data: [porcentajeGastado, 100 - porcentajeGastado],
-          backgroundColor: ["#36A2EB", "#2b2b2b"]
-        }]
-      },
-      options: {
-        plugins: {
-          datalabels: {
-            color: "white",
-            font: { weight: "bold", size: 18 },
-            formatter: () => `${porcentajeGastado}%`,
-          },
-          legend: { labels: { color: "#fff" } },
-        }
-      }
-    });
-
+    //destroyChart(doughnutChartRef);
+    //const ctx4 = doughnutChartRef.current.getContext("2d");
+    //doughnutChartRef.current._chartInstance = new Chart(ctx4, {
+    //  type: "doughnut",
+    //  data: {
+    //    labels: ["Gastado", "Disponible"],
+    //    datasets: [{
+    //      data: [porcentajeGastado, 100 - porcentajeGastado],
+    //      backgroundColor: ["#36A2EB", "#2b2b2b"]
+    //    }]
+    //  },
+    //  options: {
+    //    plugins: {
+    //      datalabels: {
+    //        color: "white",
+    //        font: { weight: "bold", size: 18 },
+    //        formatter: () => `${porcentajeGastado}%`,
+    //      },
+    //      legend: { labels: { color: "#fff" } },
+    //    }
+    //  }
+    //});
+//
     // Cleanup on unmount
     return () => {
       destroyChart(barChartRef);
       destroyChart(barChartAllRef);
-      destroyChart(lineChartRef);
-      destroyChart(doughnutChartRef);
+      //destroyChart(lineChartRef);
+      //destroyChart(doughnutChartRef);
     };
   }, []);
 
@@ -162,7 +162,7 @@ function DashboardGastos() {
           <canvas ref={barChartAllRef}></canvas>
         </div>
       </div>
-      <button className="btn back-btn" onClick={() => navigate("/inicio")}>
+      <button className="btn back-btn" onClick={() => navigate("/estadistica")}>
         Regresar
       </button>
     </div>

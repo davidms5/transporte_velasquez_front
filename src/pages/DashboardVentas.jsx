@@ -175,7 +175,7 @@ function DashboardVentas() {
         </div>
 
       </div>
-      <button className="btn back-btn" onClick={() => navigate("/inicio")}>
+      <button className="btn back-btn" onClick={() => navigate("/estadistica")}>
         Regresar
       </button>
     </div>
