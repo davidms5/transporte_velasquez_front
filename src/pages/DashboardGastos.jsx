@@ -161,14 +161,6 @@ function DashboardGastos() {
           <h3>Gasto por Proveedor</h3>
           <canvas ref={barChartAllRef}></canvas>
         </div>
-        <div className="chart-item">
-          <h3>Total Gastado por Factura</h3>
-          <canvas ref={lineChartRef}></canvas>
-        </div>
-        <div className="chart-item">
-          <h3>Presupuesto Usado</h3>
-          <canvas ref={doughnutChartRef}></canvas>
-        </div>
       </div>
       <button className="btn back-btn" onClick={() => navigate("/inicio")}>
         Regresar

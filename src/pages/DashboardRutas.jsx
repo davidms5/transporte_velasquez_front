@@ -51,9 +51,12 @@ const DashboardRutas = () => {
             y: {
               beginAtZero: true,
               title: { display: true, text: "Precio ($)" },
+              ticks: {color: "cyan"},
+              
             },
             x: {
               title: { display: true, text: "Ruta" },
+               ticks: {color: "cyan"},
             },
           },
         },
@@ -92,9 +95,11 @@ const DashboardRutas = () => {
             y: {
               beginAtZero: true,
               title: { display: true, text: "Cantidad de Recorridos" },
+              ticks: {color: "cyan"},
             },
             x: {
               title: { display: true, text: "Conductor" },
+              ticks: {color: "cyan"},
             },
           },
         },
@@ -112,7 +117,7 @@ const DashboardRutas = () => {
       </div>
 
       <div className="chart-card">
-        <h3 className="chart-title">Conductor con más Recorridos</h3>
+        <h3 className="chart-title">Conductores con mas rutas</h3>
         <canvas ref={conductorPorRecorridosRef} width="500" height="300" />
       </div>
 

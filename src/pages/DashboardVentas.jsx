@@ -116,49 +116,48 @@ function DashboardVentas() {
 
     // Chart 4: Total de Boletos Vendidos por Mes
     destroyChart(doughnutChartRef);
-    const ctx4 = doughnutChartRef.current.getContext("2d");
-    doughnutChartRef.current._chartInstance = new Chart(ctx4, {
-      type: "bar",
-      data: {
-        labels: ["Marzo", "Abril"],
-        datasets: [{
-          label: "Total de Boletos Vendidos por Mes",
-          data: [7480, 6345],
-          backgroundColor: ["#36A2EB", "#FFCE56"],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            labels: { color: "#ffffff" }
-          },
-          datalabels: {
-            color: "#ffffff",
-            font: { weight: "bold", size: 16 },
-            formatter: value => `L${value}`
-          }
-        },
-        scales: {
-          y: {
-            ticks: {
-              color: "#ffffff",
-              callback: value => `L${value}`
-            }
-          },
-          x: {
-            ticks: {
-              color: "#ffffff"
-            }
-          }
-        }
-      }
-    });
+    //const ctx4 = doughnutChartRef.current.getContext("2d");
+    //doughnutChartRef.current._chartInstance = new Chart(ctx4, {
+    //  type: "bar",
+    //  data: {
+    //    labels: ["Marzo", "Abril"],
+    //    datasets: [{
+    //      label: "Total de Boletos Vendidos por Mes",
+    //      data: [7480, 6345],
+    //      backgroundColor: ["#36A2EB", "#FFCE56"],
+    //    }]
+    //  },
+    //  options: {
+    //    responsive: true,
+    //    plugins: {
+    //      legend: {
+    //        labels: { color: "#ffffff" }
+    //      },
+    //      datalabels: {
+    //        color: "#ffffff",
+    //        font: { weight: "bold", size: 16 },
+    //        formatter: value => `L${value}`
+    //      }
+    //    },
+    //    scales: {
+    //      y: {
+    //        ticks: {
+    //          color: "#ffffff",
+    //          callback: value => `L${value}`
+    //        }
+    //      },
+    //      x: {
+    //        ticks: {
+    //          color: "#ffffff"
+    //        }
+    //      }
+    //    }
+    //  }
+    //});
 
     return () => {
       destroyChart(barChartRutaRef);
       destroyChart(barChartHorarioRef);
-      destroyChart(doughnutChartRef);
     };
   }, [ventas]);
 
@@ -174,10 +173,7 @@ function DashboardVentas() {
           <h3>Top 5 Horarios Más Usados</h3>
           <canvas ref={barChartHorarioRef}></canvas>
         </div>
-        <div className="chart-item">
-          <h3>Total de Boletos Vendidos por Mes</h3>
-          <canvas ref={doughnutChartRef}></canvas>
-        </div>
+
       </div>
       <button className="btn back-btn" onClick={() => navigate("/inicio")}>
         Regresar
